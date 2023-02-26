@@ -1,5 +1,7 @@
     package fr.greta92.Domes.beans;
 
+    import org.springframework.beans.factory.annotation.Autowired;
+
     import javax.persistence.*;
     import javax.validation.constraints.NotEmpty;
     import javax.validation.constraints.NotNull;
@@ -15,13 +17,13 @@
 
         @ManyToOne
         @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie")
-        private Categorie categorie;
+        private Categorie categorie=new Categorie();
+
 
         public Produit(){}
-        public Produit(int id_produit,String nom_produit,Categorie categorie){
+        public Produit(int id_produit,String nom_produit){
             this.id_produit=id_produit;;
             this.nom_produit=nom_produit;
-            this.categorie=categorie;
         }
 
         public int getId_produit() {

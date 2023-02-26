@@ -14,9 +14,10 @@
     public interface ProduitRepository extends CrudRepository<Produit, Integer> {
       /*  @Query("SELECT p FROM Produit p WHERE p.id_categorie=:name")
         List<Produit> searchArticleByName(@Param("name") String name);*/
-      @Query("SELECT p FROM Produit p WHERE p.id_categorie= :name")
-        public Iterable<Produit> findById_categorie(@Param("name") Integer id_categorie);
+      @Query(value = "SELECT * FROM produit WHERE produit.id_categorie = :name", nativeQuery = true)
+        public Iterable<Produit> findById_categorie(@Param("name") String id_categorie);
 
     }
+
 
 

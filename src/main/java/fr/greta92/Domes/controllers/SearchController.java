@@ -32,7 +32,7 @@
         @Autowired
         private ProduitRepository produitRepository;
         @PostMapping("/tocateg")
-        public String tochiens(@RequestParam("name") Integer name, Model model){
+        public String tochiens(@RequestParam("name") String name, Model model){
             System.out.println("le controleur tocateg");
             Iterable<Produit> produits=produitRepository.findById_categorie(name);
             System.out.println("liste "+produits.toString());

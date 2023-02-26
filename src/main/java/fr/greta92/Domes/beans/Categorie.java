@@ -13,6 +13,7 @@
         private int id_categorie;
         @NotEmpty(message = "ce champ ne doit pas être vide")
         private  String nom_categorie;
+        public Categorie(){}
 
         public Categorie(int id_categorie,String nom_categorie){
             this.id_categorie=id_categorie;

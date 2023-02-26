@@ -1,7 +1,6 @@
      <%@ page language="java" contentType="text/html; charset=UTF-8"
         pageEncoding="UTF-8"%>
      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
      <jsp:include page="header.jsp"></jsp:include>
 
      <h1  class="text-center" style="color: orange">CATALOGUE</h1><hr>
@@ -21,7 +20,11 @@
            <td><c:out value="${article.nom_article}" /></td>
            <td><c:out value="${article.prix_unitaire_article}"/></td>
            <td><img src="<c:url value="${article.image_article}"  />" height="75" width="75"/></td>
-           <td><a href="/panier" class="btn btn-primary">Ajouter au Panier</a></td>
+           <td>
+              <form action="/panier?id=<c:out value="${article.id_article}"/>" method="post" modelAttribute="panier" >
+                <button type="submit"  class="btn btn-primary">Ajouter au Panier</button>
+              </form>
+           </td>
            <td><a href="/achat" class="btn btn-success">Acheter</a></td>
           </tr>
          </c:forEach>

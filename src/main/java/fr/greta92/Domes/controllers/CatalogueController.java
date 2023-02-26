@@ -19,7 +19,7 @@
         public String catalogue( Model model ){
             System.out.println("CatalogueController");
             List<Article> articles=new ArrayList<Article>();
-        articles = (List<Article>) articleRepository.findAll();
+            articles = (List<Article>) articleRepository.findAll();
             articles.forEach((p) -> {
                 System.out.println(p.getNom_article());
                 System.out.println(p.getPrix_unitaire_article());

@@ -18,7 +18,7 @@
     <jsp:include page="header.jsp"></jsp:include>
     <hr>
     <h1 class="text-center" style="color:orange">Page de connection </h1>
-     <form:form method="post" action="/connection" modelAttribute="user"  class="mb-3" >
+     <form:form method="post" action="/connection" modelAttribute="clientc"  class="mb-3" >
 
         <div class="form-group">
              <label class="form-label">Login</label> <form:input path="login" type="text" class="form-control custom-input"/>
@@ -38,9 +38,6 @@
          <a href="/newCompte" class="btn btn-success">CREER VOTRE COMPTE CLIENT</a>
         </div><br><br>
 
-        <div>
-         <a href="/modifierCompte" class="btn btn-danger">MODIFIER MON COMPTE</a>
-        </div>
      </form:form><br>
 
        <style>

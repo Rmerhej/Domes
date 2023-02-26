@@ -1,14 +1,9 @@
     package fr.greta92.Domes.controllers;
 
     import fr.greta92.Domes.beans.Client;
-    import fr.greta92.Domes.beans.User;
-    import org.hibernate.Session;
-    import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Controller;
     import org.springframework.web.bind.annotation.GetMapping;
     import org.springframework.web.bind.annotation.ModelAttribute;
-
-    import javax.servlet.http.HttpSession;
 
     @Controller
     public class AccueilController {
@@ -23,16 +18,7 @@
             System.out.println("page connection.jsp");
             return "connection";
         }
-        /*
-        @GetMapping("/modifierCompte")
-        public String modifierC(){
-            UserController userController=new UserController();
-            if(userController.getConnected()){
-            System.out.println("page modificationCompte.jsp");
-            System.out.println(userController.getConnected());
-            return "modificationCompte";}
-            return "modifierCoordconnectedErrorPage";
-        }*/
+
         @GetMapping("/mentionsLegales")
         public String goToMentionsLegales(){
             System.out.println("page mentionsLegales.jsp");
@@ -55,11 +41,7 @@
             System.out.println("page nousContacter.jsp");
             return "nousContacter";
         }
-        @GetMapping("/panier")
-        public String goToPanier(){
-            System.out.println("page panier.jsp");
-            return "panier";
-        }
+   
         @GetMapping("/achat")
         public String goToAchat(){
             System.out.println("page achat.jsp");
@@ -80,12 +62,14 @@
             System.out.println("page cgv.jsp");
             return "cgv";
         }
-        @ModelAttribute("user")
-        public User getDefaultUser(){
-            return new User();
-        }
+
         @ModelAttribute("newclient")
         public Client getDefaultClient(){
+            return new Client();
+        }
+
+        @ModelAttribute("clientc")
+        public Client getAClient(){
             return new Client();
         }
     }

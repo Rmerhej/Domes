@@ -25,16 +25,14 @@ public class Article {
     @ManyToOne
     @JoinColumn(name = "id_produit", referencedColumnName = "id_produit")
     private Produit produit;
-    public Article(int id_article, String nom_article, double prix_unitaire_article, String image_article,Produit produit) {
+
+    public Article(){}
+    public Article(int id_article, String nom_article, double prix_unitaire_article, String image_article) {
         this.id_article = id_article;
         this.nom_article = nom_article;
         this.prix_unitaire_article = prix_unitaire_article;
         this.image_article = image_article;
-        this.produit=produit;
     }
-
-
-    public Article(){}
 
     //@ManyToOne
     //@JoinColumn(name = "id_produit")

@@ -19,7 +19,7 @@
                 return "newCompte";
             }
             String s= clientService.createClient(client);
-          if (s=="errorPage") {
+              if (s=="errorPage") {
                 return "errorPage";
             }
             model.addAttribute("message","l'utilisateur est sauvgardé");

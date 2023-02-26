@@ -11,6 +11,4 @@
     public interface ArticleRepository extends CrudRepository<Article, Integer> {
         @Query("select a from Article a where a.nom_article like %:name% ")
         List<Article> searchArticleByName(@Param("name") String name);
-
-
     }

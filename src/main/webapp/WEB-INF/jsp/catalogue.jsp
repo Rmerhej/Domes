@@ -21,7 +21,8 @@
            <td><c:out value="${article.prix_unitaire_article}"/></td>
            <td><img src="<c:url value="${article.image_article}"  />" height="75" width="75"/></td>
            <td>
-              <form action="/panier?id=<c:out value="${article.id_article}"/>" method="post" modelAttribute="panier" >
+              <form action="/panier" method="post" modelAttribute="idPrPanier" >
+                <input type="hidden" name="idArticle" value="<c:out value="${article.id_article}"/>" />
                 <button type="submit"  class="btn btn-primary">Ajouter au Panier</button>
               </form>
            </td>

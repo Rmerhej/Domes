@@ -19,8 +19,8 @@ public class Panier {
     @ManyToOne
     @JoinColumn(name = "id_client")
     private Client client;
-    // @OneToMany(mappedBy = "panier",cascade = CascadeType.ALL)
-   // public List<Article>panierArticles=new ArrayList<>();
+    @OneToMany
+    public List<Article>articlesDunPanier=new ArrayList<>();
 
 
     public Panier(){}
@@ -28,13 +28,7 @@ public class Panier {
         this.id_panier=id_panier;
         this.date_panier=date_panier;
     }
-   /* public List<Article> getPanierArticles() {
-        return panierArticles;
-    }
 
-    public void setPanierArticles(List<Article> panierArticles) {
-        this.panierArticles = panierArticles;
-    }*/
 
     public int getId_panier() {
         return id_panier;
@@ -51,7 +45,13 @@ public class Panier {
     public void setDate_panier(Date date_panier) {
         this.date_panier = date_panier;
     }
+    public List<Article> getArticlesDunPanier() {
+        return articlesDunPanier;
+    }
 
+    public void setArticlesDunPanier(List<Article> articlesDunPanier) {
+        this.articlesDunPanier = articlesDunPanier;
+    }
     @Override
     public int hashCode() {
         return super.hashCode();

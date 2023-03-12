@@ -1,13 +1,14 @@
     package fr.greta92.Domes.repository;
 
     import fr.greta92.Domes.beans.Article;
+    import org.springframework.data.jpa.repository.JpaRepository;
     import org.springframework.data.jpa.repository.Query;
-    import org.springframework.data.repository.CrudRepository;
-    import org.springframework.data.repository.query.Param;
+    import org.springframework.stereotype.Repository;
 
-    import java.util.List;
+    import java.util.Optional;
 
-    public interface PanierRepository extends CrudRepository<Article, Integer> {
-        @Query(value = "SELECT * FROM article WHERE article.id_article = :id", nativeQuery = true)
-        Article  findById(@Param("id") int id_article);
+    @Repository
+    public interface PanierRepository extends JpaRepository<Article, Integer> {
+
+      Article findById(int id_article);
     }

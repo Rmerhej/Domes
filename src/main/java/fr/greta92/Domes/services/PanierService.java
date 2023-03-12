@@ -9,10 +9,23 @@
 
     @Service
     public class PanierService {
+        List<Article> articlesAjoutes=new ArrayList<>();
+
+        public List<Article> getArticles() {
+            return articlesAjoutes;
+        }
+
+        public void addArticle(Article article) {
+            articlesAjoutes.add(article);
+        }
+        public Article deleteArticle(Article article){
+            articlesAjoutes.remove(article);
+            return article;
+        }
         @Autowired
         PanierRepository panierRepository;
         public Article fetchArticle(int id_article){
-            Article article =  panierRepository.findById(id_article);
+           Article article =  panierRepository.findById(id_article);
             return article;
         }
        public List<Article> ajoutAuPanierArticles(Article article){

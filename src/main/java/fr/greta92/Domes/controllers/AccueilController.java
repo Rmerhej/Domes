@@ -7,7 +7,7 @@
 
     @Controller
     public class AccueilController {
-        @GetMapping("/accueil")
+       @GetMapping("/accueil")
         public String goToAccueil(){
             System.out.println("page index.jsp");
             return "index";
@@ -52,11 +52,7 @@
             System.out.println("page paiement.jsp");
             return "paiement";
         }
-        @GetMapping("/errorPage")
-        public String goToErrorPage(){
-            System.out.println("page errorPage.jsp");
-            return "errorPage";
-        }
+
         @GetMapping("/cgv")
         public String goToCgv(){
             System.out.println("page cgv.jsp");

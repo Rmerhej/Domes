@@ -20,7 +20,9 @@
             }
             String s= clientService.createClient(client);
               if (s=="errorPage") {
-                return "errorPage";
+                  boolean existance=true;
+                  model.addAttribute("existingLogin","Un Client avec ce login existe déjà,Veuillez en choisir un autre");
+                return "newCompte";
             }
             model.addAttribute("message","l'utilisateur est sauvgardé");
             return "newCompte";

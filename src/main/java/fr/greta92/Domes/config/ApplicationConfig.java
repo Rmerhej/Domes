@@ -23,5 +23,6 @@
             viewResolver.setViewClass(JstlView.class);
             return viewResolver;
         }
+
     }
 

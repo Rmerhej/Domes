@@ -1,6 +1,8 @@
     <%@ page language="java" contentType="text/html; charset=UTF-8"
         pageEncoding="UTF-8"%>
         <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
     <!DOCTYPE html>
     <html lang="fr">
     <head>
@@ -17,6 +19,18 @@
 
     <hr>
     <h1 class="text-center" style="color:orange">Création de votre Compte Client</h1>
+        <c:if test="${existance}">
+                             <script>
+                                 Toastify({
+                                   text: "${existingLogin}",
+                                   duration: 5000,
+                                   gravity: "top",
+                                   position: "middle",
+                                   backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                                   stopOnFocus: true,
+                                     }).showToast();
+                             </script>
+              </c:if>
     <div>
      <form:form method="post" action="/newClientCompte" modelAttribute="newclient"  class="mb-3" >
           <div class="form-group">
@@ -51,8 +65,8 @@
 
           <div class="form-group">
               <label class="form-label">Mot de passe :</label>
-              <form:input path="mdp_client" type="text" class="form-control custom-input"/>
-              <form:errors path="mdp_client" cssClass="error"/>
+              <form:input path="mdp" type="text" class="form-control custom-input"/>
+              <form:errors path="mdp" cssClass="error"/>
           </div>
 
           <div class="form-group"><br>

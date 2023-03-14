@@ -13,9 +13,7 @@ public class Commande {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_commande;
-    @NotEmpty(message = "ce champ ne doit pas être vide")
     private Date date_commande;
-    @NotEmpty(message = "ce champ ne doit pas être vide")
     private int panier_id_panier_panier;
 
     public Commande(){}

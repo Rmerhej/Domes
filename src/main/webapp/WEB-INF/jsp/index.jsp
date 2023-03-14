@@ -1,6 +1,9 @@
    <%@ page language="java" contentType="text/html; charset=UTF-8"
         pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+
   <!DOCTYPE html>
 
   <html lang="fr">
@@ -59,11 +62,48 @@
         </div>
         <br>
         <!-- header -->
-
+         <c:if test="${not empty message}">
+                      <script>
+                          Toastify({
+                              text: "${message}",
+                              duration: 5000,
+                              gravity: "top",
+                              position: "middle",
+                              backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                              stopOnFocus: true,
+                          }).showToast();
+                      </script>
+         </c:if>
+         <c:if test="${notConnected}">
+                              <script>
+                                 Toastify({
+                                 text: "${nonConnecte}",
+                                 duration: 5000,
+                                 gravity: "top",
+                                 position: "middle",
+                                 backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                                 stopOnFocus: true,
+                                  }).showToast();
+                              </script>
+         </c:if>
+         <c:if test="${userMessage}">
+              <script>
+                 Toastify({
+                 text: "${Message}",
+                 duration: 5000,
+                 gravity: "top",
+                 position: "middle",
+                 backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                 stopOnFocus: true,
+                 }).showToast();
+              </script>
+         </c:if>
         <img src="images/pexels-katarzyna-modrzejewska-1314550.jpg" class="img-fluid" alt="chat" width=100%><br><br>
 
         <!-- CATÉGORIES -->
-        <div>${message}</div>
+
+
+
         <h2 class="text-center" style="color: orange">CATÉGORIES</h2>
         <hr>
         <div class="d-flex justify-content-between">
@@ -142,6 +182,7 @@
         <div>
            <a href="/newCompte" class="btn btn-success">CREER VOTRE COMPTE CLIENT</a>
         </div><br><br>
+
 
         <jsp:include page="footer.jsp"></jsp:include>
 

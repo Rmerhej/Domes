@@ -23,10 +23,12 @@
         @PostMapping("/panier")
         public String ajouterAuPanier(@RequestParam("idArticle") int idArticle, Model model) throws Exception {
 
-            System.out.println("ds ajoutPanier Controller");
+            System.out.println("ds Panier Controller");
             String status = (String) session.getAttribute("status");
             if (status != "connected") {
-                return "connectionErrorPage";
+                boolean notConnected=true;
+                model.addAttribute("nonConnecte","Veuillez vous connecter si vous avez un compte,sinon creeez-en un");
+                return "index";
             }
 
             if (status == "connected") {

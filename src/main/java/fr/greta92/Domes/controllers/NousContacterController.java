@@ -2,7 +2,6 @@
 
     import fr.greta92.Domes.services.EmailService;
     import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.mail.javamail.JavaMailSender;
     import org.springframework.stereotype.Controller;
     import org.springframework.ui.Model;
     import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +28,7 @@
                 String to ="rolandmerhej7@gmail.com";
                 String subject= "message de Domes app";
                 String text = "Nom :"+nom+"\n"+"Prénom :"+prenom+"\n"+"Email :"+ mail+"\n"+"Message :"+msg;
-                emailService.sendSimpleMessage(to,subject,text);
+               emailService.sendSimpleMessage(to,subject,text);
                 return "nousContacter";
             }
             catch(MessagingException e){

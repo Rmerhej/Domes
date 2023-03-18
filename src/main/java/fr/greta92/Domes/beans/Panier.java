@@ -19,8 +19,9 @@ public class Panier {
     @ManyToOne
     @JoinColumn(name = "id_client")
     private Client client;
+
     @OneToMany
-    public List<Article>articlesDunPanier=new ArrayList<>();
+    public List<LignePanier>articlesDunPanier=new ArrayList<>();
 
 
     public Panier(){}
@@ -28,7 +29,6 @@ public class Panier {
         this.id_panier=id_panier;
         this.date_panier=date_panier;
     }
-
 
     public int getId_panier() {
         return id_panier;
@@ -45,26 +45,35 @@ public class Panier {
     public void setDate_panier(Date date_panier) {
         this.date_panier = date_panier;
     }
-    public List<Article> getArticlesDunPanier() {
+    public List<LignePanier> getArticlesDunPanier() {
         return articlesDunPanier;
     }
 
-    public void setArticlesDunPanier(List<Article> articlesDunPanier) {
+    public void setArticlesDunPanier(List<LignePanier> articlesDunPanier) {
         this.articlesDunPanier = articlesDunPanier;
-    }
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Panier panier = (Panier) o;
+        return id_panier == panier.id_panier && date_panier.equals(panier.date_panier) && client.equals(panier.client) && articlesDunPanier.equals(panier.articlesDunPanier);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Panier{" +
+                "id_panier=" + id_panier +
+                ", date_panier=" + date_panier +
+                ", client=" + client +
+                ", articlesDunPanier=" + articlesDunPanier +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_panier, date_panier, client, articlesDunPanier);
     }
 
     public Client getClient() {

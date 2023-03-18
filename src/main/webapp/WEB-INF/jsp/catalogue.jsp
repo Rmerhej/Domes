@@ -22,9 +22,11 @@
            <td><c:out value="${article.nom_article}" /></td>
            <td><c:out value="${article.prix_unitaire_article}"/></td>
            <td><img src="<c:url value="${article.image_article}"  />" height="75" width="75"/></td>
+
            <td>
               <form action="/panier" method="post" modelAttribute="idPrPanier" >
                 <input type="hidden" name="idArticle" value="<c:out value="${article.id_article}"/>" />
+                 <input type="number" name="quantite" value="1" min="1">
                 <button type="submit"  class="btn btn-primary">Ajouter au Panier</button>
               </form>
            </td>

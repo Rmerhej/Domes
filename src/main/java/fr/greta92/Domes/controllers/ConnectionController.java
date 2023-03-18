@@ -50,12 +50,11 @@
                 session.setAttribute("status","connected");
                 String status=(String) session.getAttribute("status");
                 model.addAttribute("message","Vous êtes Connecté");
-                model.addAttribute("message", true);
+                model.addAttribute("messageConnection", true);
 
                 return "index";
             }
 
-            model.addAttribute("message","Vous êtes Connecté");
                 return "index";
         }}
     }

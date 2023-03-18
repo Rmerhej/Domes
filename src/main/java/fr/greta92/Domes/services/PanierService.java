@@ -1,6 +1,7 @@
     package fr.greta92.Domes.services;
 
     import fr.greta92.Domes.beans.Article;
+    import fr.greta92.Domes.beans.LignePanier;
     import fr.greta92.Domes.repository.PanierRepository;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@
 
     @Service
     public class PanierService {
+
         List<Article> articlesAjoutes=new ArrayList<>();
 
         public List<Article> getArticles() {
@@ -22,6 +24,16 @@
             articlesAjoutes.remove(article);
             return article;
         }
+        public Double montantPanier(List<LignePanier> articlesDunPanier) {
+            Double montantTotalPanier = 0.0;
+            for (LignePanier lignePanier : articlesDunPanier) {
+                Double totalLigne = lignePanier.prixLigne(lignePanier.getArticleLignePanier(), lignePanier.getQuantite());
+                montantTotalPanier += totalLigne;
+            }
+            return montantTotalPanier;
+        }
+
+
         @Autowired
         PanierRepository panierRepository;
         public Article fetchArticle(int id_article){

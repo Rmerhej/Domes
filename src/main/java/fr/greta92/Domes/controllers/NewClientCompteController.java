@@ -22,9 +22,9 @@
               if (s=="errorPage") {
                   boolean existance=true;
                   model.addAttribute("existingLogin","Un Client avec ce login existe déjà,Veuillez en choisir un autre");
-                return "newCompte";
+                       return "newCompte";
             }
-            model.addAttribute("message","l'utilisateur est sauvgardé");
-            return "newCompte";
+            model.addAttribute("message","Félicitations votre compte à été créer !");
+              return "index";
         }
     }

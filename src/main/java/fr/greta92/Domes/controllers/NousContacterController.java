@@ -25,11 +25,10 @@
             String mail= request.getParameter("mail");
             String msg=request.getParameter("msg");
             System.out.println("nom :"+nom+"\n"+"prenom :"+prenom+"\n"+"mail :"+mail+"\n"+msg);
-            boolean userMessage=true;
             try{
                 String to ="rolandmerhej7@gmail.com";
-                String subject= "message de :"+nom+" "+prenom;
-                String text = "from :"+mail+"\n"+msg;
+                String subject= "message de Domes app";
+                String text = "Nom :"+nom+"\n"+"Prénom :"+prenom+"\n"+"Email :"+ mail+"\n"+"Message :"+msg;
                 emailService.sendSimpleMessage(to,subject,text);
                 return "nousContacter";
             }

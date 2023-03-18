@@ -18,44 +18,41 @@
             private HttpSession session;
 
         @PostMapping("/connection")
-         public String verifyIfUserIsClent( Client client, BindingResult result, Model model) throws Exception {
+         public String verifyIfUserIsClent(@ModelAttribute("clientc") Client client, BindingResult result, Model model) throws Exception {
             String dejaConnecte = (String) session.getAttribute("status");
             if(result.hasErrors()){
                 return "seConnecter";
             }
 
-            if(dejaConnecte == "connected"){
-                boolean alreadyConnected=true;
+
+            if("connected".equals(dejaConnecte)){
                 model.addAttribute("dejaConnecte","vous êtes déjà connecté");
-                return  "connection";
+                model.addAttribute("connecte", true);
+                return  "index";
 
             }
+
             else{
             System.out.println("ds verifyIfUserIsClent Connection Controller");
             boolean existe=clientService.clientExist(client);
             Client clientConnecteSession=clientService.findClient(client.getLogin());
 
-            System.out.println(clientConnecteSession);
 
             if(!existe){
 
-                boolean dontExiste= true;
-                model.addAttribute("dontExiste",dontExiste);
                 model.addAttribute("creezUnCompte","Veuillez créer un compte Client pour pouvoir se connecter");
+                model.addAttribute("creez", true);
                 return "connection";
                 }
             if(existe){
 
                 session.setAttribute("clientConnecteSession", clientConnecteSession);
-                System.out.println("affichage client apres connection");
                 session.setAttribute("status","connected");
                 String status=(String) session.getAttribute("status");
-                System.out.println(status);
-                System.out.println(clientConnecteSession);
                 model.addAttribute("message","Vous êtes Connecté");
+                model.addAttribute("message", true);
 
                 return "index";
-
             }
 
             model.addAttribute("message","Vous êtes Connecté");

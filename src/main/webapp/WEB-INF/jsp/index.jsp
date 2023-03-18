@@ -1,8 +1,7 @@
-   <%@ page language="java" contentType="text/html; charset=UTF-8"
-        pageEncoding="UTF-8"%>
+   <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
   <!DOCTYPE html>
 
@@ -57,23 +56,50 @@
                       <img src="images/bitcoin.png" height="25" width="25" alt="panier"></a>
 
                    <a href="/accueil"> <img src="images/home.svg" height="25" width="25" alt="maison"> </a>
+                   <a href="/deconnection"> <img src="images/logout.png" height="25" width="25" alt="boutonOff"> </a>
                </div>
             </div>
         </div>
         <br>
         <!-- header -->
-         <c:if test="${not empty message}">
-                      <script>
-                          Toastify({
-                              text: "${message}",
-                              duration: 5000,
-                              gravity: "top",
-                              position: "middle",
-                              backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-                              stopOnFocus: true,
-                          }).showToast();
-                      </script>
-         </c:if>
+
+        <c:if test="${connecte}">
+             <script>
+                 Toastify({
+                 text: "${dejaConnecte}",
+                 duration: 5000,
+                 gravity: "top",
+                 position: "middle",
+                 backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                 stopOnFocus: true,
+                 }).showToast();
+             </script>
+        </c:if>
+            <c:if test="${creez}">
+                     <script>
+                         Toastify({
+                         text: "${creezUnCompte}",
+                         duration: 5000,
+                         gravity: "top",
+                         position: "middle",
+                         backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                         stopOnFocus: true,
+                         }).showToast();
+                     </script>
+                </c:if>
+                    <c:if test="${message}">
+                               <script>
+                                  Toastify({
+                                      text: "${message}",
+                                      duration: 5000,
+                                      gravity: "top",
+                                      position: "middle",
+                                      backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                                      stopOnFocus: true,
+                                  }).showToast();
+                               </script>
+                         </c:if>
+
          <c:if test="${notConnected}">
                               <script>
                                  Toastify({
@@ -86,18 +112,19 @@
                                   }).showToast();
                               </script>
          </c:if>
-         <c:if test="${userMessage}">
-              <script>
-                 Toastify({
-                 text: "${Message}",
-                 duration: 5000,
-                 gravity: "top",
-                 position: "middle",
-                 backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-                 stopOnFocus: true,
-                 }).showToast();
-              </script>
-         </c:if>
+           <c:if test="${dec}">
+                                       <script>
+                                          Toastify({
+                                          text: "${deconnecte}",
+                                          duration: 5000,
+                                          gravity: "top",
+                                          position: "middle",
+                                          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+                                          stopOnFocus: true,
+                                           }).showToast();
+                                       </script>
+                  </c:if>
+
         <img src="images/pexels-katarzyna-modrzejewska-1314550.jpg" class="img-fluid" alt="chat" width=100%><br><br>
 
         <!-- CATÉGORIES -->
@@ -143,44 +170,53 @@
 
         <!-- Articles -->
         <div class="d-flex justify-content-between">
-            <div class="card" style="width: 18rem;">
+            <div class="card h-75 shadow" style="width: 18rem;">
                 <img src="images/pexels-chevanon-photography-1108099.jpg"
                     class="card-img-top" alt="#">
-                <div class="card-body">
-                    <h5 class="card-title">Chien</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card</p>
-                    <form action="/catalogue" method="post">
-                       <button type="submit"  class="btn btn-primary">CONSULTER LE CATALOGUE</button>
-                    </form>
+                <div class="card-body" >
+                    <div class="animal-name">Nom de l'animal</div>
+                    <div class="animal-price">Prix de l'animal</div>
                 </div>
+                <form action="/catalogue" method="post" class="text-center">
+                    <button id="btn_card_index1" type="submit"  class="btn btn-outline-primary ">CONSULTER LE CATALOGUE</button>
+                </form>
             </div>
-            <div class="card" style="width: 18rem;">
+            <div class="card h-75 shadow" style="width: 18rem;">
                 <img src="images/pexels-richard-segal-1618606.jpg" class="card-img-top" alt="#">
                 <div class="card-body">
-                    <h5 class="card-title">Tortue</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card</p>
-                  <form action="/catalogue" method="post">
-                     <button type="submit"  class="btn btn-primary">CONSULTER LE CATALOGUE</button>
-                  </form>
+                  <div class="animal-name">Nom de l'animal</div>
+                  <div class="animal-price">Prix de l'animal</div>
                 </div>
+                 <form action="/catalogue" method="post" class="text-center">
+                     <button type="submit"  class="btn btn-outline-secondary">CONSULTER LE CATALOGUE</button>
+                 </form>
             </div>
-            <div class="card" style="width: 18rem;">
+            <div class="card h-75 shadow" style="width: 18rem;">
+                <img src="images/German Shepherd.jpg" class="card-img-top" alt="#" width="286" height="214">
+                <div class="card-body">
+                   <div class="animal-name">Nom de l'animal</div>
+                   <div class="animal-price">Prix de l'animal</div>
+                </div>
+                <form action="/catalogue" method="post" class="text-center">
+                   <button type="submit"  class="btn btn-outline-danger">CONSULTER LE CATALOGUE</button>
+                </form>
+            </div>
+            <div class="card h-75 shadow" style="width: 18rem;">
                 <img src="images/pexels-roshan-kamath-1661179.jpg"
                     class="card-img-top" alt="#" width="286" height="214">
                 <div class="card-body">
-                    <h5 class="card-title">Perroquet</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card</p>
-                  <form action="/catalogue" method="post">
-                      <button type="submit"  class="btn btn-primary">CONSULTER LE CATALOGUE</button>
-                   </form>
+                   <div class="animal-name">Nom de l'animal</div>
+                   <div class="animal-price">Prix de l'animal</div>
                 </div>
+                 <form action="/catalogue" method="post" class="text-center">
+                     <button type="submit"  class="btn btn-outline-warning">CONSULTER LE CATALOGUE</button>
+                 </form>
             </div>
         </div>  <br><br>
         <div>
-            <a href="/modifierCompte" class="btn btn-danger">MODIFIER MON COMPTE</a>
-         </div>
-        <div>
-           <a href="/newCompte" class="btn btn-success">CREER VOTRE COMPTE CLIENT</a>
+           <a href="/modifierCompte" class="btn btn-outline-danger">MODIFIER VOTRE COMPTE</a>
+
+           <a href="/newCompte" class="btn btn-outline-success">CREER VOTRE COMPTE CLIENT</a>
         </div><br><br>
 
 

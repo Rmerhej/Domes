@@ -23,5 +23,5 @@
          </c:forEach>
        </tbody>
 
-    </table>
+  </table>
     <jsp:include page="footer.jsp"></jsp:include>

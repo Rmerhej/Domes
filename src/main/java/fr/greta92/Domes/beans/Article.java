@@ -25,6 +25,9 @@ public class Article {
     @ManyToOne
     @JoinColumn(name = "id_produit", referencedColumnName = "id_produit")
     private Produit produit;
+    @ManyToOne
+    @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie")
+    private Categorie categorie;
 
     public Article(){}
     public Article(int id_article, String nom_article, double prix_unitaire_article, String image_article) {
@@ -34,8 +37,6 @@ public class Article {
         this.image_article = image_article;
     }
 
-    //@ManyToOne
-    //@JoinColumn(name = "id_produit")
     public int getId_article() {
         return id_article;
     }
@@ -73,6 +74,13 @@ public class Article {
 
     public Produit getProduit() {
         return produit;
+    }
+    public Categorie getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
     }
 
 

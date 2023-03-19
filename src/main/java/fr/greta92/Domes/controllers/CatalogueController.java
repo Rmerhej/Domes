@@ -10,6 +10,7 @@
 
 
     import java.util.ArrayList;
+    import java.util.Collections;
     import java.util.List;
     @Controller
     public class CatalogueController {
@@ -20,13 +21,9 @@
             System.out.println("CatalogueController");
             List<Article> articles=new ArrayList<Article>();
             articles = (List<Article>) articleRepository.findAll();
-            articles.forEach((p) -> {
-                System.out.println(p.getNom_article());
-                System.out.println(p.getPrix_unitaire_article());
-                System.out.println(p.getImage_article());
-
-                    });
-            model.addAttribute("articles",articles);
+            List<Article> shuffledArticles = new ArrayList<>(articles);
+            Collections.shuffle(shuffledArticles);
+            model.addAttribute("articles",shuffledArticles);
             return  "catalogue";
         }
     }

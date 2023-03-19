@@ -174,8 +174,8 @@
                 <img src="images/pexels-chevanon-photography-1108099.jpg"
                     class="card-img-top" alt="#">
                 <div class="card-body" >
-                    <div class="animal-name">Nom de l'animal</div>
-                    <div class="animal-price">Prix de l'animal</div>
+                    <div class="animal-name">Mignon</div>
+                    <div class="animal-price">Prix unitaire : 150</div>
                 </div>
                 <form action="/catalogue" method="post" class="text-center">
                     <button id="btn_card_index1" type="submit"  class="btn btn-outline-primary ">CONSULTER LE CATALOGUE</button>
@@ -184,8 +184,8 @@
             <div class="card h-75 shadow" style="width: 18rem;">
                 <img src="images/pexels-richard-segal-1618606.jpg" class="card-img-top" alt="#">
                 <div class="card-body">
-                  <div class="animal-name">Nom de l'animal</div>
-                  <div class="animal-price">Prix de l'animal</div>
+                  <div class="animal-name">Fou des océans</div>
+                  <div class="animal-price">Prix :600</div>
                 </div>
                  <form action="/catalogue" method="post" class="text-center">
                      <button type="submit"  class="btn btn-outline-secondary">CONSULTER LE CATALOGUE</button>
@@ -194,8 +194,8 @@
             <div class="card h-75 shadow" style="width: 18rem;">
                 <img src="images/German Shepherd.jpg" class="card-img-top" alt="#" width="286" height="214">
                 <div class="card-body">
-                   <div class="animal-name">Nom de l'animal</div>
-                   <div class="animal-price">Prix de l'animal</div>
+                   <div class="animal-name">Fidel</div>
+                   <div class="animal-price">Prix unitaire: 500.0</div>
                 </div>
                 <form action="/catalogue" method="post" class="text-center">
                    <button type="submit"  class="btn btn-outline-danger">CONSULTER LE CATALOGUE</button>
@@ -205,8 +205,8 @@
                 <img src="images/pexels-roshan-kamath-1661179.jpg"
                     class="card-img-top" alt="#" width="286" height="214">
                 <div class="card-body">
-                   <div class="animal-name">Nom de l'animal</div>
-                   <div class="animal-price">Prix de l'animal</div>
+                   <div class="animal-name">Radio</div>
+                   <div class="animal-price">Prix : 700.0</div>
                 </div>
                  <form action="/catalogue" method="post" class="text-center">
                      <button type="submit"  class="btn btn-outline-warning">CONSULTER LE CATALOGUE</button>

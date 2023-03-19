@@ -43,6 +43,7 @@
                 Double montantTotal= panierService.montantPanier(ligneArticlesDunPanier);
                 model.addAttribute("montant",montantTotal );
                 return "panier";
+
             }
 
             return "panier";

@@ -33,7 +33,7 @@
         private ProduitRepository produitRepository;
         @PostMapping("/tocateg")
         public String tochiens(@RequestParam("name") String name, Model model){
-            System.out.println("le controleur tocateg");
+            System.out.println("le controleur SearchController tocateg");
             Iterable<Produit> produits=produitRepository.findById_categorie(name);
             System.out.println("liste "+produits.toString());
             model.addAttribute("produits",produits);

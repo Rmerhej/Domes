@@ -17,7 +17,7 @@
 
         @ManyToOne
         @JoinColumn(name = "id_categorie", referencedColumnName = "id_categorie")
-        private Categorie categorie=new Categorie();
+        private Categorie categorie;
 
 
         public Produit(){}

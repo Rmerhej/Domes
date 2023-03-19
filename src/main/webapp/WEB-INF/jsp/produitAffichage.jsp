@@ -23,7 +23,9 @@
                    <tr>
                       <td ><c:out value="${produit.nom_produit}" /></td>
                       <td>
-                        <form action="/articles?name1=${produit.id_produit}&name2=${produit.nom_produit}" method="post">
+                        <form action="/articlesParRace" method="post">
+                           <input type="hidden" name="idCategorie" value=<c:out value="${produit.getCategorie().id_categorie}"/> />
+                           <input type="hidden" name="nomProduit" value=<c:out value="${produit.nom_produit}"/> />
                           <button type="submit" class="btn btn-primary">Consulter</button>
                         </form>
                       </td>

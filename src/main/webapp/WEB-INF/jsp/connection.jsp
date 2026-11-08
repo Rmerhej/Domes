@@ -1,67 +1,35 @@
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="header.jsp"><jsp:param name="titre" value="Connexion"/></jsp:include>
 
-    <!DOCTYPE html>
-      <html lang="fr">
-        <head>
-          <meta charset="UTF-8">
-          <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-            crossorigin="anonymous">
-         <title>connection.jsp</title>
-       </head>
+<div class="container section">
+  <div class="carte-formulaire etroite mx-auto">
+    <h1 class="titre-page">Connexion</h1>
 
-       <body class="container">
+    <%-- ?inscrit : après création du compte / ?erreur : ajouté par Spring Security --%>
+    <c:if test="${param.inscrit != null}">
+      <div class="alert alert-success" role="status">Votre compte est créé. Connectez-vous pour continuer.</div>
+    </c:if>
+    <c:if test="${param.erreur != null}">
+      <div class="alert alert-danger" role="alert">Identifiant ou mot de passe incorrect.</div>
+    </c:if>
 
-         <jsp:include page="header.jsp"></jsp:include> <hr>
+    <%-- <form:form> ajoute tout seul le jeton CSRF --%>
+    <form:form method="post" action="/connection" modelAttribute="clientc">
+      <div class="mb-3">
+        <label class="form-label" for="login">Identifiant</label>
+        <form:input path="login" id="login" cssClass="form-control" autocomplete="username" required="required" autofocus="autofocus"/>
+      </div>
+      <div class="mb-4">
+        <label class="form-label" for="mdp">Mot de passe</label>
+        <form:password path="mdp" id="mdp" cssClass="form-control" autocomplete="current-password" required="required"/>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+    </form:form>
 
-         <h1 class="text-center" style="color:orange">Connexion</h1>
+    <p class="mt-4 mb-0 text-center">Pas encore de compte ? <a href="/newCompte">Créer un compte</a></p>
+  </div>
+</div>
 
-         <%-- ?erreur : ajouté par Spring Security quand le login ou le mot de passe est faux --%>
-         <c:if test="${param.erreur != null}">
-           <div class="alert alert-danger">Identifiant ou mot de passe incorrect.
-             Pas encore de compte ? <a href="/newCompte">Créez-en un</a>.</div>
-         </c:if>
-       <form:form method="post" action="/connection" modelAttribute="clientc"  class="mb-3" >
-
-         <div class="form-group">
-             <label class="form-label">Login</label> <form:input path="login" type="text" class="form-control custom-input"/>
-             <form:errors path="login" cssClass="error"/>
-         </div>
-
-         <div class="form-group">
-             <label class="form-label">Password</label> <form:input path="mdp" type="password" class="form-control custom-input"/>
-              <form:errors path="mdp" cssClass="error"/>
-         </div><br>
-
-         <div class="form-group">
-             <input type="submit" value="Se connecter" id="submit" >
-         </div><br><br>
-
-         <div>
-          <a href="/newCompte" class="btn btn-success">CREER VOTRE COMPTE CLIENT</a>
-         </div><br><br>
-       </form:form><br>
-
-       <style>
-         .custom-input {
-           width: 30%;
-           }
-         form{
-            background-image: url('images/pexels-pixabay-45170.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-           }
-          #submit{
-            color:white;
-            background-color:green;
-           }
-       </style>
-
-   <jsp:include page="footer.jsp"></jsp:include>
-
+<jsp:include page="footer.jsp"/>

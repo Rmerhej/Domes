@@ -1,40 +1,36 @@
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- Fin commune de toutes les pages : ferme <main>, pied de page, scripts. --%>
+</main>
 
-  <footer >
-
-    <div id="footer" class="container text-center " height="200" >
-      <div class="row">
-        <div class="col">
-           <img alt="logo_twitter" src="images/twitter.png" height="45" width="45">
-           <img alt="logo_instagram" src="images/instagram.png" height="45" width="45">
-           <img alt="logo_facebook" src="images/facebook.png" height="45" width="45">
-         </div>
-        <div class="col">
-          <img alt="carte de crédit" src="images/carte-bancaire.png" height="45" width="45">
-          <img alt="carte de crédit" src="images/carte.png" height="45" width="45">
-          <img alt="carte de crédit" src="images/carte-de-credit.png" height="45" width="45">
-        </div>
-        <div class="col">
-          <img src="images/logoBanquePopulaire.png" alt="#" height="45" width="45">
-          <img src="images/truck.png" height="45" width="45" alt="#">
-        </div>
-        <div class="col">
-           <a  href="/cgv">CGV. </a>
-        </div>
-        <div class="col"><a  href="/mentionsLegales">MENTIONS LÉGALES- </a></div>
-        <div class="col"> <a href="/nousContacter">NOUS CONTACTER- </a></div>
+<footer class="pied">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <h2>Domes</h2>
+        <p class="mb-0">Chiens, chats, poissons, reptiles et oiseaux : trouvez le compagnon qui vous ressemble.</p>
+      </div>
+      <div class="col-6 col-md-3">
+        <h2>Aide</h2>
+        <ul>
+          <li><a href="/nousContacter">Nous contacter</a></li>
+          <li><a href="/mesCommandes">Mes commandes</a></li>
+          <li><a href="/panier">Mon panier</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-4">
+        <h2>Informations</h2>
+        <ul>
+          <li><a href="/cgv">Conditions générales de vente</a></li>
+          <li><a href="/mentionsLegales">Mentions légales</a></li>
+        </ul>
       </div>
     </div>
+    <p class="mentions mb-0">Projet de formation : les paiements sont simulés, aucun animal n'est réellement vendu.</p>
+  </div>
+</footer>
 
-  </footer>
-      <style>
-          footer {
-          background-color:black;
-         position: fixed;
-                 left: 0;
-                 bottom: 0;
-                 width: 100%;
-          }
-      </style>
-  </body>
-  </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+</body>
+</html>

@@ -5,6 +5,10 @@
 
   <h2 class="my-3">Mon panier</h2>
 
+  <c:if test="${not empty erreur}">
+    <div class="alert alert-danger"><c:out value="${erreur}"/></div>
+  </c:if>
+
   <c:choose>
     <c:when test="${empty items}">
       <p>Votre panier est vide.</p>

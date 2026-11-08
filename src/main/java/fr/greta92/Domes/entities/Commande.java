@@ -1,70 +1,103 @@
 package fr.greta92.Domes.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
-import java.util.Objects;
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Une commande payée par un client.
+ *
+ * Elle est créée au paiement, à partir du panier en session,
+ * et contient une LigneCommande par article.
+ *
+ * Table "commandes" (au pluriel) : l'ancienne table "commande" avait une
+ * colonne obligatoire panier_id_panier_panier que Hibernate (ddl-auto=update)
+ * ne supprime pas ; repartir sur une table neuve évite des erreurs à l'insertion.
+ */
 @Entity
+@Table(name = "commandes")
 public class Commande {
+
+    private static final DateTimeFormatter FORMAT_DATE = DateTimeFormatter.ofPattern("dd/MM/yyyy 'à' HH:mm");
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id_commande;
-    private Date date_commande;
-    private int panier_id_panier_panier;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_commande")
+    private int id;
 
-    public Commande(){}
-    public Commande(int id_commande,Date date_commande,int panier_id_panier_panier ){
-        this.id_commande=id_commande;
-        this.date_commande=date_commande;
-        this.panier_id_panier_panier= panier_id_panier_panier;
+    @Column(name = "date_commande", nullable = false)
+    private LocalDateTime dateCommande;
 
-    }
-    public int getId_commande() {
-        return id_commande;
-    }
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "id_client")
+    private Client client;
 
-    public void setId_commande(int id_commande) {
-        this.id_commande = id_commande;
-    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "statut", nullable = false, length = 20)
+    private StatutCommande statut;
 
-    public Date getDate_commande() {
-        return date_commande;
-    }
+    @Column(name = "montant_total", nullable = false)
+    private double montantTotal;
 
-    public void setDate_commande(Date date_commande) {
-        this.date_commande = date_commande;
+    // cascade ALL : enregistrer la commande enregistre aussi ses lignes
+    @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LigneCommande> lignes = new ArrayList<>();
+
+    protected Commande() {
+        // pour JPA
     }
 
-    public int getPanier_id_panier_panier() {
-        return panier_id_panier_panier;
+    public Commande(Client client, LocalDateTime dateCommande) {
+        this.client = client;
+        this.dateCommande = dateCommande;
+        this.statut = StatutCommande.PAYEE;
     }
 
-    public void setPanier_id_panier_panier(int panier_id_panier_panier) {
-        this.panier_id_panier_panier = panier_id_panier_panier;
+    /** Ajoute une ligne et recalcule le total. */
+    public void ajouterLigne(Article article, int quantite, double prixUnitaire) {
+        LigneCommande ligne = new LigneCommande(this, article, quantite, prixUnitaire);
+        lignes.add(ligne);
+        montantTotal += ligne.getSousTotal();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Commande commande = (Commande) o;
-        return id_commande == commande.id_commande && panier_id_panier_panier == commande.panier_id_panier_panier && date_commande.equals(commande.date_commande);
+    public int getId() {
+        return id;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id_commande, date_commande, panier_id_panier_panier);
+    public LocalDateTime getDateCommande() {
+        return dateCommande;
+    }
+
+    /** Pour les JSP : fmt:formatDate ne sait pas formater un LocalDateTime. */
+    public String getDateFormatee() {
+        return dateCommande != null ? dateCommande.format(FORMAT_DATE) : "";
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public StatutCommande getStatut() {
+        return statut;
+    }
+
+    public double getMontantTotal() {
+        return montantTotal;
+    }
+
+    public List<LigneCommande> getLignes() {
+        return lignes;
+    }
+
+    public int getNombreArticles() {
+        return lignes.stream().mapToInt(LigneCommande::getQuantite).sum();
     }
 
     @Override
     public String toString() {
-        return "Commande{" +
-                "id_commande=" + id_commande +
-                ", date_commande=" + date_commande +
-                ", panier_id_panier_panier=" + panier_id_panier_panier +
-                '}';
+        // pas de client ni de lignes ici : évite les boucles infinies Commande <-> LigneCommande
+        return "Commande{id=" + id + ", date=" + dateCommande + ", statut=" + statut + ", total=" + montantTotal + '}';
     }
 }

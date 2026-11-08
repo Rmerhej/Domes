@@ -1,10 +1,9 @@
-package fr.greta92.Domes.beans;
+package fr.greta92.Domes.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.Objects;
 

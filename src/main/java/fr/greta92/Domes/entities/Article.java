@@ -1,12 +1,7 @@
-package fr.greta92.Domes.beans;
-
-import fr.greta92.Domes.repository.ProduitRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.session.SessionRepository;
+package fr.greta92.Domes.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity

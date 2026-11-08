@@ -1,7 +1,7 @@
     package fr.greta92.Domes.services;
 
-    import fr.greta92.Domes.beans.Article;
-    import fr.greta92.Domes.beans.LignePanier;
+    import fr.greta92.Domes.entities.Article;
+    import fr.greta92.Domes.entities.LignePanier;
     import fr.greta92.Domes.repository.PanierRepository;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;

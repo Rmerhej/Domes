@@ -1,6 +1,6 @@
     package fr.greta92.Domes.controllers;
 
-    import fr.greta92.Domes.beans.Article;
+    import fr.greta92.Domes.entities.Article;
     import fr.greta92.Domes.repository.ArticleRepository;
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Controller;

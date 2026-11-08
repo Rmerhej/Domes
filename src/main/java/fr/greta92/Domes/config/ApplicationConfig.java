@@ -13,7 +13,7 @@
     public class ApplicationConfig extends WebMvcConfigurationSupport {
         @Override
         protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-            //On dit a spring ou se situe les css et les images
+
             registry.addResourceHandler("css/**",
                     "images/**").addResourceLocations("classpath:/static/css/", "classpath:/static/images/");
         }

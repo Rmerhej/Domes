@@ -1,6 +1,6 @@
     package fr.greta92.Domes.controllers;
 
-    import fr.greta92.Domes.beans.Client;
+    import fr.greta92.Domes.entities.Client;
     import fr.greta92.Domes.repository.ClientRepository;
     import fr.greta92.Domes.services.ClientService;
     import org.springframework.beans.factory.annotation.Autowired;

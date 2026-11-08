@@ -6,6 +6,7 @@
     <!DOCTYPE html>
     <html lang="fr">
     <head>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -38,14 +39,28 @@
                </div>
               <div class="col">
 
-                <a href="/seConnecter"><img alt="représentation personne" src="images/homme.png"height="25" width="25"></a>
-                <a href="/panier"><img src="images/bitcoin.png" height="25" width="25" alt="panier"></a>
-                <a href="/accueil"><img src="images/home.svg" height="25" width="25" alt="maison"></a>
+                <a href="/seConnecter" style="margin-right: 15px;"><img alt="représentation personne" src="images/homme.png"height="25" width="25"></a>
+                <a href="/panier"
+                ><img src="images/bitcoin.png" height="25" width="25" alt="panier"></a>
+                <a href="/accueil"><img src="images/home.svg" height="25" width="25" alt="maison"
                 <a href="/deconnection"> <img src="images/logout.png" height="25" width="25" alt="maison"> </a>
 
               </div>
             </div>
         </div>
+        <%@ page import=" fr.greta92.Domes..services.CartService" %>
+        <%
+            CartService cartService = new CartService();
+            int cartCount = cartService.getCartItemCount(session);
+        %>
+
+        <!-- Cart Icon -->
+        <a href="cart.jsp" class="position-relative">
+            <i class="fa fa-shopping-cart fa-2x"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <%= cartCount %>
+            </span>
+        </a>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"

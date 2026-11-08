@@ -1,8 +1,7 @@
-package fr.greta92.Domes.beans;
+package fr.greta92.Domes.entities;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,20 +13,15 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_client;
-   // @NotEmpty(message = "ce champ ne peut pas être vide")
+
     private String nom_client;
-   // @NotEmpty(message = "ce champ ne peut pas être vide")
+
     private String prenom_client;
     @Size(min=10, message = "vous devez saisir au moins 10 chiffres")
     private String telephone_client;
     private String email_client;
     private String login;
-    /*@Pattern(regexp = "((?=.*\\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\\w\\d\\s:])([^\\s]){8,16})", message = "password doit contenir 1 numéro (0-9)\n" +
-            " 1 lettre majuscule \n" +
-            "1 lettre minuscule \n" +
-            "1 caractère spécial\n" +
-            "mot de passe de 8-16 caractèrs sans espace\n" +
-            "\n")*/
+
     private String mdp;
     @ElementCollection
     @CollectionTable(name = "adresses", joinColumns = @JoinColumn(name = "client_id"))

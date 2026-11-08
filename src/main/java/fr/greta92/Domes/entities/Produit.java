@@ -1,16 +1,14 @@
-    package fr.greta92.Domes.beans;
-
-    import org.springframework.beans.factory.annotation.Autowired;
+    package fr.greta92.Domes.entities;
 
     import javax.persistence.*;
     import javax.validation.constraints.NotEmpty;
-    import javax.validation.constraints.NotNull;
     import java.util.Objects;
 
     @Entity
     public class Produit {
+
         @Id
-        @GeneratedValue
+        @GeneratedValue(strategy = GenerationType.AUTO)
         private int id_produit;
         @NotEmpty(message = "ce champ ne doit pas être vide")
         private String nom_produit;
@@ -70,4 +68,6 @@
                     ", categorie=" + categorie +
                     '}';
         }
+
+
     }

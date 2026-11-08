@@ -1,4 +1,4 @@
-    package fr.greta92.Domes.beans;
+    package fr.greta92.Domes.entities;
 
     import javax.persistence.*;
     import javax.validation.constraints.NotEmpty;

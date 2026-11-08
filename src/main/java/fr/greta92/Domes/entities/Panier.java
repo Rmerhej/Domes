@@ -1,9 +1,7 @@
-package fr.greta92.Domes.beans;
+package fr.greta92.Domes.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

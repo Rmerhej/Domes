@@ -1,7 +1,7 @@
     package fr.greta92.Domes.controllers;
 
-    import fr.greta92.Domes.beans.Article;
-    import fr.greta92.Domes.beans.Produit;
+    import fr.greta92.Domes.entities.Article;
+    import fr.greta92.Domes.entities.Produit;
     import fr.greta92.Domes.repository.ArticleRepository;
     import fr.greta92.Domes.repository.ProduitRepository;
     import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@
     import org.springframework.web.bind.annotation.PostMapping;
     import org.springframework.web.bind.annotation.RequestParam;
     import java.util.List;
-    import java.util.Optional;
 
     @Controller
     public class SearchController {

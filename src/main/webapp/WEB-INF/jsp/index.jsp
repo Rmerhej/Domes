@@ -49,8 +49,14 @@
                </div>
                <div class="col">
 
-                   <a href="/seConnecter">
-                      <img alt="représentation personne" src="images/homme.png" height="25" width="25"> </a>
+                   <c:choose>
+                     <c:when test="${sessionScope.status == 'connected'}">
+                       <a href="/modifierCompte" title="Mon compte"><img alt="représentation personne" src="images/homme.png" height="25" width="25"></a>
+                     </c:when>
+                     <c:otherwise>
+                       <a href="/seConnecter" title="Se connecter"><img alt="représentation personne" src="images/homme.png" height="25" width="25"></a>
+                     </c:otherwise>
+                   </c:choose>
 
                     <a href="/panier">
                       <img src="images/bitcoin.png" height="25" width="25" alt="panier"></a>

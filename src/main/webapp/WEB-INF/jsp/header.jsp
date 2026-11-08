@@ -39,7 +39,14 @@
                </div>
               <div class="col">
 
-                <a href="/seConnecter" style="margin-right: 15px;"><img alt="représentation personne" src="images/homme.png"height="25" width="25"></a>
+                <c:choose>
+                    <c:when test="${sessionScope.status == 'connected'}">
+                        <a href="/modifierCompte" title="Mon compte" style="margin-right: 15px;"><img alt="mon compte" src="images/homme.png" height="25" width="25"></a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="/seConnecter" title="Se connecter" style="margin-right: 15px;"><img alt="se connecter" src="images/homme.png" height="25" width="25"></a>
+                    </c:otherwise>
+                </c:choose>
                 <a href="/panier" class="position-relative" title="Mon panier">
                     <img src="images/bitcoin.png" height="25" width="25" alt="panier">
                     <c:if test="${sessionScope.cartCount > 0}">

@@ -7,6 +7,12 @@
 
     @Controller
     public class AccueilController {
+        // http://localhost:8080/ -> page d'accueil
+        @GetMapping("/")
+        public String racine(){
+            return "redirect:/accueil";
+        }
+
        @GetMapping("/accueil")
         public String goToAccueil(){
             System.out.println("page index.jsp");
@@ -25,10 +31,10 @@
             return "mentionsLegales";
         }
 
+        // monCompte.jsp n'existe pas : "Mon compte" = la page de modification
         @GetMapping("/monCompte")
         public String goToMonCompte(){
-            System.out.println("page monCompte.jsp");
-            return "monCompte";
+            return "redirect:/modifierCompte";
         }
         @GetMapping("/newCompte")
         public String goToNewCompte(){

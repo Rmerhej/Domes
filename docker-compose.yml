@@ -1,0 +1,44 @@
+# Lance Domes + une base MySQL, sans rien installer d'autre que Docker.
+#
+#   1. copier .env.example en .env et choisir un mot de passe
+#   2. docker compose up --build
+#   3. ouvrir http://localhost:8080
+#
+# La base Docker est indépendante de celle de WAMP (aucun port MySQL
+# n'est ouvert sur ta machine : pas de conflit avec WAMP sur 3306).
+
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: domesservice
+      MYSQL_USER: domes
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Copie .env.example en .env et choisis un DB_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+    volumes:
+      - domes-data:/var/lib/mysql
+    healthcheck:
+      # Connexion TCP avec l'utilisateur de l'appli : pendant son initialisation,
+      # MySQL répond au "ping" local avant d'être vraiment prêt.
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -u domes -p\"$$MYSQL_PASSWORD\" --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:mysql://db:3306/domesservice?useSSL=false&allowPublicKeyRetrieval=true
+      DB_USERNAME: domes
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_INIT_MODE: always
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  domes-data:

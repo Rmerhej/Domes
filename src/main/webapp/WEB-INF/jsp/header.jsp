@@ -1,68 +1,91 @@
-    <%@ page language="java" contentType="text/html; charset=UTF-8"
-        pageEncoding="UTF-8"%>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%--
+  Début commun de toutes les pages : <head>, barre de navigation, ouverture de <main>.
+  Utilisation dans une page :
+    <jsp:include page="header.jsp"><jsp:param name="titre" value="Mon panier"/></jsp:include>
+    ... contenu ...
+    <jsp:include page="footer.jsp"/>
+--%>
+<%-- Prix en euros au format français : voir localeResolver dans ApplicationConfig --%>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><c:if test="${not empty param.titre}"><c:out value="${param.titre}"/> | </c:if>Domes, animalerie en ligne</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="/css/domes.css" rel="stylesheet">
+</head>
+<body>
 
-    <!DOCTYPE html>
-    <html lang="fr">
-    <head>
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-        crossorigin="anonymous">
-    <title>header</title>
-    </head>
-    <body class="container">
+<nav class="navbar navbar-expand-lg barre-nav sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="/accueil"><img src="/images/logo_DOMES_SERVICE.png" alt="Domes, retour à l'accueil"></a>
 
-        <div class="container text-center">
-            <div class="row align-items-start">
-                <div class="col">
-                    <img alt="logo domesServices" src="images/logo_DOMES_SERVICE.png"
-                        height="50">
-                </div>
-                <div class="col">
-                    <div class="btn-group">
-                        <button class="btn dropdown-toggle" type="button"
-                            data-bs-toggle="dropdown" data-bs-auto-close="true"
-                            aria-expanded="false">CATÉGORIES</button>
-                        <ul class="dropdown-menu">
-                           <li><form action="/tocateg?name=1" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> CHIENS </button></form></li>
-                           <li><form action="/tocateg?name=2" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> CHATS </button></form></li>
-                           <li><form action="/tocateg?name=4" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> POISSONS </button></form></li>
-                           <li><form action="/tocateg?name=5" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> REPTILES </button></form></li>
-                           <li><form action="/tocateg?name=6" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> OISEAUX </button></form></li>
-                        </ul>
-                    </div>
-               </div>
-              <div class="col">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+            aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-                <c:choose>
-                    <c:when test="${sessionScope.status == 'connected'}">
-                        <a href="/modifierCompte" title="Mon compte" style="margin-right: 15px;"><img alt="mon compte" src="images/homme.png" height="25" width="25"></a>
-                    </c:when>
-                    <c:otherwise>
-                        <a href="/seConnecter" title="Se connecter" style="margin-right: 15px;"><img alt="se connecter" src="images/homme.png" height="25" width="25"></a>
-                    </c:otherwise>
-                </c:choose>
-                <a href="/panier" class="position-relative" title="Mon panier">
-                    <img src="images/bitcoin.png" height="25" width="25" alt="panier">
-                    <c:if test="${sessionScope.cartCount > 0}">
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            <c:out value="${sessionScope.cartCount}"/>
-                        </span>
-                    </c:if>
-                </a>
-                <a href="/accueil" style="margin-left: 15px;"><img src="images/home.svg" height="25" width="25" alt="maison"></a>
-                <c:if test="${sessionScope.status == 'connected'}"><form action="/deconnection" method="post" class="d-inline"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="btn btn-link p-0 align-baseline" title="Se déconnecter"><img src="images/logout.png" height="25" width="25" alt="déconnexion"></button></form></c:if>
+    <div class="collapse navbar-collapse" id="menu">
+      <%-- Les id correspondent aux catégories en base (voir data.sql) --%>
+      <ul class="navbar-nav me-auto gap-lg-2">
+        <li class="nav-item"><a class="nav-link ${param.name == '1' ? 'active' : ''}" href="/tocateg?name=1">Chiens</a></li>
+        <li class="nav-item"><a class="nav-link ${param.name == '2' ? 'active' : ''}" href="/tocateg?name=2">Chats</a></li>
+        <li class="nav-item"><a class="nav-link ${param.name == '4' ? 'active' : ''}" href="/tocateg?name=4">Poissons</a></li>
+        <li class="nav-item"><a class="nav-link ${param.name == '5' ? 'active' : ''}" href="/tocateg?name=5">Reptiles</a></li>
+        <li class="nav-item"><a class="nav-link ${param.name == '6' ? 'active' : ''}" href="/tocateg?name=6">Oiseaux</a></li>
+      </ul>
 
-              </div>
-            </div>
-        </div>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-            crossorigin="anonymous">
-        </script>
+      <form class="d-flex recherche my-2 my-lg-0 me-lg-3" action="/search" method="get" role="search">
+        <label for="recherche" class="visually-hidden">Rechercher un animal par son nom</label>
+        <input class="form-control" type="search" id="recherche" name="search" placeholder="Un nom : Fidel, Nemo…"
+               value="<c:out value="${param.search}"/>">
+        <button class="btn btn-primary" type="submit" title="Rechercher"><i class="bi bi-search" aria-hidden="true"></i><span class="visually-hidden">Rechercher</span></button>
+      </form>
+
+      <div class="d-flex align-items-center gap-1">
+        <c:choose>
+          <c:when test="${sessionScope.status == 'connected'}">
+            <a class="icone-nav" href="/modifierCompte" title="Mon compte"><i class="bi bi-person-circle" aria-hidden="true"></i><span class="visually-hidden">Mon compte</span></a>
+          </c:when>
+          <c:otherwise>
+            <a class="icone-nav" href="/seConnecter" title="Se connecter"><i class="bi bi-person" aria-hidden="true"></i><span class="visually-hidden">Se connecter</span></a>
+          </c:otherwise>
+        </c:choose>
+
+        <a class="icone-nav" href="/panier" title="Mon panier">
+          <i class="bi bi-basket2" aria-hidden="true"></i><span class="visually-hidden">Mon panier</span>
+          <c:if test="${sessionScope.cartCount > 0}">
+            <span class="badge rounded-pill"><c:out value="${sessionScope.cartCount}"/><span class="visually-hidden"> articles</span></span>
+          </c:if>
+        </a>
+
+        <c:if test="${sessionScope.status == 'connected'}">
+          <%-- Déconnexion en POST avec jeton CSRF (exigé par Spring Security) --%>
+          <form action="/deconnection" method="post" class="d-inline m-0">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+            <button type="submit" class="icone-nav" title="Se déconnecter"><i class="bi bi-box-arrow-right" aria-hidden="true"></i><span class="visually-hidden">Se déconnecter</span></button>
+          </form>
+        </c:if>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main>
+<%-- Messages communs à toutes les pages --%>
+<c:if test="${not empty message or not empty deconnecte or not empty nonConnecte}">
+  <div class="container mt-3">
+    <c:if test="${not empty message}"><div class="alert alert-success mb-0" role="status"><c:out value="${message}"/></div></c:if>
+    <c:if test="${not empty deconnecte}"><div class="alert alert-info mb-0" role="status"><c:out value="${deconnecte}"/></div></c:if>
+    <c:if test="${not empty nonConnecte}"><div class="alert alert-warning mb-0" role="status"><c:out value="${nonConnecte}"/></div></c:if>
+  </div>
+</c:if>

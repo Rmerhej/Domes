@@ -1,0 +1,237 @@
+/* =====================================================================
+   Domes : feuille de style du site
+   Chargée après Bootstrap 5, qu'elle personnalise.
+   ===================================================================== */
+
+/* ---------- Jetons de design ---------- */
+:root {
+  --encre: #1F2A30;          /* texte principal, footer */
+  --encre-douce: #55646B;    /* texte secondaire */
+  --mandarine: #E8811A;      /* couleur de la marque (décor, anneaux, soulignés) */
+  --sauge: #2F7D6D;          /* actions : boutons, liens */
+  --sauge-fonce: #245F53;
+  --surface: #F2F6F4;        /* fonds de sections */
+  --trait: #DCE4E1;          /* bordures */
+  --rayon-carte: 14px;
+
+  /* Bootstrap lit ces variables : on lui donne nos couleurs */
+  --bs-body-color: var(--encre);
+  --bs-body-font-family: "Source Sans 3", system-ui, sans-serif;
+  --bs-body-font-size: 1.0625rem;
+  --bs-link-color: var(--sauge-fonce);
+  --bs-link-hover-color: var(--encre);
+  --bs-border-color: var(--trait);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #fff;
+  line-height: 1.55;
+}
+main { flex: 1; padding-bottom: 1rem; }
+main:has(> .section-surface:last-child) { padding-bottom: 0; }
+
+/* ---------- Typographie ---------- */
+h1, h2, h3, .navbar-brand, .titre-animal {
+  font-family: "Fredoka", "Source Sans 3", sans-serif;
+  font-weight: 600;
+  color: var(--encre);
+  letter-spacing: 0.005em;
+}
+h1, .titre-page { font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.5rem); line-height: 1.15; margin-bottom: 0.4em; }
+h2 { font-size: 1.6rem; line-height: 1.2; }
+h3 { font-size: 1.25rem; }
+.chapeau { color: var(--encre-douce); max-width: 60ch; }
+.texte-court { max-width: 70ch; }
+
+/* ---------- Focus clavier toujours visible ---------- */
+:focus-visible {
+  outline: 3px solid var(--mandarine);
+  outline-offset: 2px;
+}
+
+/* ---------- Boutons ---------- */
+.btn { border-radius: 999px; font-weight: 600; padding-inline: 1.1rem; }
+.btn-primary {
+  --bs-btn-bg: var(--sauge); --bs-btn-border-color: var(--sauge);
+  --bs-btn-hover-bg: var(--sauge-fonce); --bs-btn-hover-border-color: var(--sauge-fonce);
+  --bs-btn-active-bg: var(--sauge-fonce); --bs-btn-active-border-color: var(--sauge-fonce);
+  --bs-btn-disabled-bg: var(--sauge); --bs-btn-disabled-border-color: var(--sauge);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--sauge-fonce); --bs-btn-border-color: var(--sauge);
+  --bs-btn-hover-bg: var(--sauge); --bs-btn-hover-border-color: var(--sauge); --bs-btn-hover-color: #fff;
+  --bs-btn-active-bg: var(--sauge-fonce); --bs-btn-active-border-color: var(--sauge-fonce);
+}
+
+/* ---------- Barre de navigation ---------- */
+.barre-nav {
+  background: #fff;
+  border-bottom: 1px solid var(--trait);
+}
+.barre-nav .navbar-brand img { height: 44px; width: auto; }
+.barre-nav .nav-link {
+  color: var(--encre);
+  font-weight: 600;
+  border-bottom: 3px solid transparent;
+  padding-bottom: 0.35rem;
+}
+.barre-nav .nav-link:hover { color: var(--sauge-fonce); }
+.barre-nav .nav-link.active { border-bottom-color: var(--mandarine); color: var(--encre); }
+.recherche { max-width: 17rem; }
+.recherche .form-control { border-radius: 999px 0 0 999px; }
+.recherche .btn { border-radius: 0 999px 999px 0; padding-inline: 0.9rem; }
+
+.icone-nav {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 2.5rem; height: 2.5rem;
+  border-radius: 50%;
+  color: var(--encre);
+  font-size: 1.3rem;
+  position: relative;
+  background: none; border: 0;
+}
+.icone-nav:hover { background: var(--surface); color: var(--encre); }
+.icone-nav .badge {
+  position: absolute; top: 0; right: -2px;
+  background: var(--mandarine);
+  font-size: 0.7rem;
+}
+
+/* ---------- Messages ---------- */
+.alert { border-radius: 12px; }
+
+/* ---------- Accueil : héros ---------- */
+.heros {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+  padding-block: 2.5rem 1.5rem;
+}
+@media (min-width: 992px) {
+  .heros { grid-template-columns: 1fr 1.1fr; padding-block: 3.5rem 2rem; }
+}
+.heros h1 { font-size: clamp(2.2rem, 1.5rem + 2.4vw, 3.2rem); }
+.heros img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 28px;
+}
+
+/* ---------- L'élément signature : les médaillons de catégorie ----------
+   Ronds comme une médaille de collier, cerclés de mandarine. */
+.medaillons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.medaillon {
+  display: flex; flex-direction: column; align-items: center; gap: 0.55rem;
+  text-decoration: none;
+  color: var(--encre);
+  font-family: "Fredoka", sans-serif;
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+.medaillon img {
+  width: 108px; height: 108px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  box-shadow: 0 0 0 3px var(--mandarine);
+}
+.medaillon:hover { color: var(--sauge-fonce); }
+.medaillon:hover img { box-shadow: 0 0 0 3px var(--sauge); }
+.medaillon.actif img { box-shadow: 0 0 0 5px var(--mandarine); }
+
+/* ---------- Sections ---------- */
+.section { padding-block: 2.5rem; }
+.section-surface { background: var(--surface); }
+.entete-section { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 0.5rem 1rem; margin-bottom: 1.25rem; }
+.entete-section h2 { margin: 0; }
+
+/* ---------- Carte d'un animal ---------- */
+.carte-animal {
+  height: 100%;
+  display: flex; flex-direction: column;
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon-carte);
+  overflow: hidden;
+  background: #fff;
+}
+.carte-animal img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.carte-animal .corps { padding: 1rem 1.1rem 1.15rem; display: flex; flex-direction: column; gap: 0.35rem; flex: 1; }
+.titre-animal { font-size: 1.25rem; margin: 0; }
+.espece { color: var(--encre-douce); font-size: 0.95rem; }
+.prix { font-weight: 700; font-size: 1.15rem; }
+.carte-animal form { margin-top: auto; padding-top: 0.6rem; display: flex; gap: 0.5rem; align-items: center; }
+.carte-animal input[type=number] { width: 4.5rem; border-radius: 999px; text-align: center; }
+
+/* ---------- Races d'une catégorie (puces) ---------- */
+.puces { display: flex; flex-wrap: wrap; gap: 0.6rem; list-style: none; padding: 0; }
+.puces a {
+  display: inline-block;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--trait);
+  border-radius: 999px;
+  color: var(--encre);
+  text-decoration: none;
+  font-weight: 600;
+}
+.puces a:hover { border-color: var(--sauge); color: var(--sauge-fonce); }
+.puces a.actif { background: var(--encre); border-color: var(--encre); color: #fff; }
+
+/* ---------- Formulaires ---------- */
+.carte-formulaire {
+  max-width: 560px;
+  border: 1px solid var(--trait);
+  border-radius: 18px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: #fff;
+}
+.carte-formulaire.etroite { max-width: 420px; }
+.form-control, .form-select { border-radius: 10px; padding: 0.6rem 0.8rem; }
+.form-control:focus { border-color: var(--sauge); box-shadow: 0 0 0 0.2rem rgba(47, 125, 109, 0.2); }
+.form-label { font-weight: 600; }
+.form-check-input:checked { background-color: var(--sauge); border-color: var(--sauge); }
+
+/* ---------- Tableaux (panier, commandes) ---------- */
+.tableau { border: 1px solid var(--trait); border-radius: var(--rayon-carte); overflow: hidden; }
+.tableau .table { margin: 0; }
+.tableau thead th { background: var(--surface); font-weight: 600; border-bottom: 1px solid var(--trait); }
+.tableau img { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; }
+.total { font-size: 1.25rem; }
+
+/* ---------- État vide ---------- */
+.vide {
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 1px dashed var(--trait);
+  border-radius: var(--rayon-carte);
+}
+
+/* ---------- Pied de page ---------- */
+.pied {
+  margin-top: 0;          /* l'espace vient du padding des sections : pas de bande blanche */
+  background: var(--encre);
+  color: #D5DEE0;
+  padding-block: 2.5rem 1.5rem;
+}
+.pied h2 { color: #fff; font-size: 1.1rem; }
+.pied a { color: #fff; }
+.pied ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.35rem; }
+.pied .mentions { border-top: 1px solid rgba(255, 255, 255, 0.15); margin-top: 2rem; padding-top: 1rem; font-size: 0.9rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}

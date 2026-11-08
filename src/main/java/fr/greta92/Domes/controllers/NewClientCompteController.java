@@ -23,10 +23,10 @@
               if (s=="errorPage") {
                   boolean existance=true;
                   model.addAttribute("existingLogin",
-                          "Un Client avec ce login existe déjà,Veuillez en choisir un autre");
+                          "Ce login est déjà utilisé. Choisissez-en un autre.");
                        return "newCompte";
             }
-            model.addAttribute("message","Félicitations votre compte à été créer !");
-              return "index";
+            // Compte créé : on envoie vers la connexion, avec un message
+              return "redirect:/seConnecter?inscrit";
         }
     }

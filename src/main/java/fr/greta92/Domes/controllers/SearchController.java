@@ -1,40 +1,28 @@
-    package fr.greta92.Domes.controllers;
+package fr.greta92.Domes.controllers;
 
-    import fr.greta92.Domes.entities.Article;
-    import fr.greta92.Domes.entities.Produit;
-    import fr.greta92.Domes.repository.ArticleRepository;
-    import fr.greta92.Domes.repository.ProduitRepository;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.stereotype.Controller;
-    import org.springframework.ui.Model;
-    import org.springframework.web.bind.annotation.PostMapping;
-    import org.springframework.web.bind.annotation.RequestParam;
-    import java.util.List;
+import fr.greta92.Domes.repository.ArticleRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-    @Controller
-    public class SearchController {
-       @Autowired
-        private ArticleRepository articleRepository;
+/** Recherche d'un animal par son nom (barre de recherche du menu). */
+@Controller
+public class SearchController {
 
-        @PostMapping("/search")
-        public String search(@RequestParam("search") String name, Model model ){
-            System.out.println("le controleur search");
-            System.out.println("le parametre est = "+name);
-            List<Article>articles;
-            articles=articleRepository.searchArticleByName(name);
-            System.out.println("liste "+articles.toString());
-            model.addAttribute("articles",articles);
-            return  "articleRecherche";
-        }
-        @Autowired
-        private ProduitRepository produitRepository;
-        @PostMapping("/tocateg")
-        public String tochiens(@RequestParam("name") String name, Model model){
-            System.out.println("le controleur SearchController tocateg");
-            Iterable<Produit> produits=produitRepository.findById_categorie(name);
-            System.out.println("liste "+produits.toString());
-            model.addAttribute("produits",produits);
-            return "produitAffichage";
-        }
+    private final ArticleRepository articleRepository;
 
+    public SearchController(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
     }
+
+    // GET : l'adresse de la recherche peut être partagée ou mise en favori ; POST gardé pour compatibilité
+    @RequestMapping(value = "/search", method = {RequestMethod.GET, RequestMethod.POST})
+    public String search(@RequestParam(value = "search", defaultValue = "") String recherche, Model model) {
+        String terme = recherche.trim();
+        model.addAttribute("recherche", terme);
+        model.addAttribute("articles", terme.isEmpty() ? java.util.List.of() : articleRepository.searchArticleByName(terme));
+        return "articleRecherche";
+    }
+}

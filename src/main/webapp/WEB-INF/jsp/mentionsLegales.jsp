@@ -1,49 +1,27 @@
-    <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <!DOCTYPE html>
-    <html lang="fr">
-       <head>
-         <meta charset="UTF-8">
-         <link
-           href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-           rel="stylesheet"
-           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-           crossorigin="anonymous">
-          <title>Mentions Légales</title>
-      </head>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:include page="header.jsp"><jsp:param name="titre" value="Mentions légales"/></jsp:include>
 
-     <body class="container">
-        <jsp:include page="header.jsp"></jsp:include>
+<div class="container section texte-court">
+  <h1 class="titre-page">Mentions légales</h1>
 
-        <h1 class="text-center" style="color: orange">MENTIONS LÉGALES</h1>
+  <div class="alert alert-info" role="note">
+    Domes est un projet de formation réalisé au GRETA 92. Les sections ci-dessous sont à compléter
+    avant toute mise en ligne publique.
+  </div>
 
-        <p>orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
-            et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
-            felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-            consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
-            nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-            venenatis vitae, justo. orem ipsum dolor sit amet, consectetuer
-            adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-            sociis natoque penatibus et magnis dis parturient montes, nascetur
-            ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-            pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-            fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
-            rhoncus ut, imperdiet a, venenatis vitae, justo.
-            orem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
-            et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
-            felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-            consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
-            nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-            venenatis vitae, justo. orem ipsum dolor sit amet, consectetuer
-            adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-            sociis natoque penatibus et magnis dis parturient montes, nascetur
-            ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
-            pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo,
-            fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo,
-            rhoncus ut, imperdiet a, venenatis vitae, justo.
-        </p><hr>
+  <h2 class="mt-4">Éditeur du site</h2>
+  <p>À compléter : nom ou raison sociale, adresse, contact.</p>
 
-        <jsp:include page="footer.jsp"></jsp:include>
-     </body>
-    </html>
+  <h2 class="mt-4">Hébergement</h2>
+  <p>À compléter : nom et adresse de l'hébergeur.</p>
+
+  <h2 class="mt-4">Données personnelles</h2>
+  <p>Les informations saisies (compte client, commandes, formulaire de contact) servent uniquement
+    au fonctionnement du site. Les mots de passe sont enregistrés sous forme chiffrée.
+    À compléter : durée de conservation et exercice de vos droits.</p>
+
+  <h2 class="mt-4">Crédits photos</h2>
+  <p>À compléter : auteurs et licences des photographies utilisées.</p>
+</div>
+
+<jsp:include page="footer.jsp"/>

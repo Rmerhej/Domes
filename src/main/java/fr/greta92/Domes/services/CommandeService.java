@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,15 +58,14 @@ public class CommandeService {
         return commandeRepository.save(commande);
     }
 
+    /** Commandes du client, lignes comprises (prêtes à afficher dans une JSP). */
     public List<Commande> commandesDuClient(int idClient) {
-        return clientRepository.findById(idClient)
-                .map(commandeRepository::findByClientOrderByDateCommandeDesc)
-                .orElse(Collections.emptyList());
+        return commandeRepository.findAvecLignesParClient(idClient);
     }
 
-    /** Une commande, seulement si elle appartient bien à ce client. */
+    /** Une commande avec ses lignes, seulement si elle appartient bien à ce client. */
     public Optional<Commande> commandeDuClient(int idCommande, int idClient) {
-        return commandeRepository.findById(idCommande)
+        return commandeRepository.findAvecLignes(idCommande)
                 .filter(c -> c.getClient().getId_client() == idClient);
     }
 }

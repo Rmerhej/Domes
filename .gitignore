@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Secrets et fichiers générés ###
+src/main/resources/application-local.properties
+*.war
+*.patch

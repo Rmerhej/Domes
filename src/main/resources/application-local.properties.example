@@ -1,0 +1,8 @@
+# Copie ce fichier en "application-local.properties" (même dossier)
+# et complète les valeurs. Ce fichier-là est ignoré par Git.
+# Utilisateur MySQL (root par défaut sous WAMP) :
+DB_USERNAME=root
+DB_PASSWORD=
+# Envoi des mails "Nous contacter" (mot de passe d'application Google) :
+MAIL_USERNAME=
+MAIL_PASSWORD=

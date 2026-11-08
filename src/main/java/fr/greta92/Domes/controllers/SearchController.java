@@ -1,7 +1,7 @@
     package fr.greta92.Domes.controllers;
 
-    import fr.greta92.Domes.beans.Article;
-    import fr.greta92.Domes.beans.Produit;
+    import fr.greta92.Domes.entities.Article;
+    import fr.greta92.Domes.entities.Produit;
     import fr.greta92.Domes.repository.ArticleRepository;
     import fr.greta92.Domes.repository.ProduitRepository;
     import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@
     import org.springframework.web.bind.annotation.PostMapping;
     import org.springframework.web.bind.annotation.RequestParam;
     import java.util.List;
-    import java.util.Optional;
 
     @Controller
     public class SearchController {
@@ -24,8 +23,6 @@
             List<Article>articles;
             articles=articleRepository.searchArticleByName(name);
             System.out.println("liste "+articles.toString());
-            System.out.println(articles.get(0).getNom_article());
-            System.out.println(articles.get(0).getPrix_unitaire_article());
             model.addAttribute("articles",articles);
             return  "articleRecherche";
         }

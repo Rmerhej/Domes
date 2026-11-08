@@ -6,3 +6,5 @@ DB_PASSWORD=
 # Envoi des mails "Nous contacter" (mot de passe d'application Google) :
 MAIL_USERNAME=
 MAIL_PASSWORD=
+# Optionnel : adresse qui reçoit les messages "Nous contacter" (par défaut MAIL_USERNAME)
+CONTACT_EMAIL=

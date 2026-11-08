@@ -29,11 +29,11 @@
                             data-bs-toggle="dropdown" data-bs-auto-close="true"
                             aria-expanded="false">CATÉGORIES</button>
                         <ul class="dropdown-menu">
-                           <li><form action="/tocateg?name=1" method="post"><button type="submit" class="dropdown-item"> CHIENS </button></form></li>
-                           <li><form action="/tocateg?name=2" method="post"><button type="submit" class="dropdown-item"> CHATS </button></form></li>
-                           <li><form action="/tocateg?name=4" method="post"><button type="submit" class="dropdown-item"> POISSONS </button></form></li>
-                           <li><form action="/tocateg?name=5" method="post"><button type="submit" class="dropdown-item"> REPTILES </button></form></li>
-                           <li><form action="/tocateg?name=6" method="post"><button type="submit" class="dropdown-item"> OISEAUX </button></form></li>
+                           <li><form action="/tocateg?name=1" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> CHIENS </button></form></li>
+                           <li><form action="/tocateg?name=2" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> CHATS </button></form></li>
+                           <li><form action="/tocateg?name=4" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> POISSONS </button></form></li>
+                           <li><form action="/tocateg?name=5" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> REPTILES </button></form></li>
+                           <li><form action="/tocateg?name=6" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> OISEAUX </button></form></li>
                         </ul>
                     </div>
                </div>
@@ -56,7 +56,7 @@
                     </c:if>
                 </a>
                 <a href="/accueil" style="margin-left: 15px;"><img src="images/home.svg" height="25" width="25" alt="maison"></a>
-                <a href="/deconnection"> <img src="images/logout.png" height="25" width="25" alt="déconnexion"> </a>
+                <c:if test="${sessionScope.status == 'connected'}"><form action="/deconnection" method="post" class="d-inline"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="btn btn-link p-0 align-baseline" title="Se déconnecter"><img src="images/logout.png" height="25" width="25" alt="déconnexion"></button></form></c:if>
 
               </div>
             </div>

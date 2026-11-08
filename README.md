@@ -7,7 +7,7 @@ Projet de formation (GRETA 92) : boutique en ligne d'animaux de compagnie.
 ## Fonctionnalités
 
 - Catalogue par catégorie (chiens, chats, poissons, reptiles, oiseaux) et recherche par nom
-- Création de compte, connexion (mots de passe hachés en BCrypt), modification du compte
+- Création de compte, connexion avec Spring Security (BCrypt, protection CSRF), modification du compte
 - Panier en session (quantités, sous-totaux, total)
 - Commande avec paiement **simulé** (aucune donnée bancaire), confirmation et historique « Mes commandes »
 - Formulaire de contact par e-mail
@@ -61,6 +61,7 @@ Aucun mot de passe n'est écrit dans le code. `application.properties` lit ces v
 | `DB_INIT_MODE`  | `always` pour charger `data.sql`       | `never`                                         |
 | `MAIL_USERNAME` | Compte Gmail d'envoi                   | *(vide)*                                        |
 | `MAIL_PASSWORD` | Mot de passe d'application Google      | *(vide)*                                        |
+| `CONTACT_EMAIL` | Destinataire du formulaire de contact  | `MAIL_USERNAME`                                 |
 
 ## Organisation du code
 

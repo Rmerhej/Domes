@@ -1,5 +1,6 @@
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
 
@@ -19,7 +20,13 @@
 
          <jsp:include page="header.jsp"></jsp:include> <hr>
 
-         <h1 class="text-center" style="color:orange">Page de connection </h1>
+         <h1 class="text-center" style="color:orange">Connexion</h1>
+
+         <%-- ?erreur : ajouté par Spring Security quand le login ou le mot de passe est faux --%>
+         <c:if test="${param.erreur != null}">
+           <div class="alert alert-danger">Identifiant ou mot de passe incorrect.
+             Pas encore de compte ? <a href="/newCompte">Créez-en un</a>.</div>
+         </c:if>
        <form:form method="post" action="/connection" modelAttribute="clientc"  class="mb-3" >
 
          <div class="form-group">
@@ -33,7 +40,7 @@
          </div><br>
 
          <div class="form-group">
-             <input type="submit" value="Submit" id="submit" >
+             <input type="submit" value="Se connecter" id="submit" >
          </div><br><br>
 
          <div>
@@ -55,19 +62,6 @@
             background-color:green;
            }
        </style>
-
-             <c:if test="${!existe}">
-                            <script>
-                                Toastify({
-                                  text: "${creezUnCompte}",
-                                  duration: 5000,
-                                  gravity: "top",
-                                  position: "middle",
-                                  backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
-                                  stopOnFocus: true,
-                                    }).showToast();
-                            </script>
-             </c:if>
 
    <jsp:include page="footer.jsp"></jsp:include>
 

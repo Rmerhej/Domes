@@ -8,9 +8,10 @@
     <jsp:include page="_carteArticle.jsp"/>
 --%>
 <article class="carte-animal">
-  <img src="<c:url value="/${carte.image_article}"/>" alt="Photo de <c:out value="${carte.nom_article}"/>" loading="lazy">
+  <%-- La photo mène à la fiche ; le lien du titre suffit aux lecteurs d'écran --%>
+  <a href="/animal/${carte.id_article}" tabindex="-1" aria-hidden="true"><img src="<c:url value="/${carte.image_article}"/>" alt="" loading="lazy"></a>
   <div class="corps">
-    <h3 class="titre-animal"><c:out value="${carte.nom_article}"/></h3>
+    <h3 class="titre-animal"><a class="lien-fiche" href="/animal/${carte.id_article}"><c:out value="${carte.nom_article}"/></a></h3>
     <c:if test="${not empty carte.produit}">
       <span class="espece"><c:out value="${carte.produit.nom_produit}"/></span>
     </c:if>

@@ -52,6 +52,10 @@
       </form>
 
       <div class="d-flex align-items-center gap-1">
+        <%-- Visible seulement pour les administrateurs (rôle ADMIN, voir SecurityConfig) --%>
+        <c:if test="${pageContext.request.isUserInRole('ADMIN')}">
+          <a class="icone-nav" href="/admin" title="Administration"><i class="bi bi-gear" aria-hidden="true"></i><span class="visually-hidden">Administration</span></a>
+        </c:if>
         <c:choose>
           <c:when test="${sessionScope.status == 'connected'}">
             <a class="icone-nav" href="/modifierCompte" title="Mon compte"><i class="bi bi-person-circle" aria-hidden="true"></i><span class="visually-hidden">Mon compte</span></a>

@@ -1,11 +1,19 @@
-FROM ubuntu
-LABEL maintainer="Roland"
-RUN apt-get update -y
-RUN apt-get install -y curl apache2
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server
-RUN apt-get install wget -y
-RUN wget https://download.oracle.com/java/19/latest/jdk-19_linux-x64_bin.deb
-RUN apt-get -qqy install ./jdk-19_linux-x64_bin.deb -y
-RUN update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-19/bin/java 1919
-ENTRYPOINT ["java", "-jar", "app.war"]
+# ---------- Étape 1 : compilation avec Maven ----------
+FROM maven:3.9-eclipse-temurin-11 AS build
+WORKDIR /app
 
+# On copie d'abord le pom seul : tant qu'il ne change pas, Docker garde
+# les dépendances téléchargées en cache et le build suivant est rapide.
+COPY pom.xml .
+RUN mvn -q -B dependency:go-offline
+
+COPY src ./src
+RUN mvn -q -B package -DskipTests
+
+# ---------- Étape 2 : image d'exécution, légère (Java seul, sans Maven) ----------
+FROM eclipse-temurin:11-jre
+WORKDIR /app
+COPY --from=build /app/target/Domes-*.war app.war
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.war"]

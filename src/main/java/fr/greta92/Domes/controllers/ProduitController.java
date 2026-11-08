@@ -17,9 +17,7 @@
 
         @PostMapping("/articlesParRace")
         public String toarticles(@RequestParam("idCategorie") String name1,@RequestParam("nomProduit") String name2, Model model){
-            System.out.println("SearchArticleController");
             List<Article>foundarticles=searchArticleRepository.findProduitByNom(name1,name2);
-            System.out.println("liste "+foundarticles.toString());
             model.addAttribute("foundarticles",foundarticles);
             return "articles";
         }

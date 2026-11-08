@@ -19,7 +19,7 @@
       <strong><fmt:formatNumber value="${montant}" type="currency" currencySymbol="€" /></strong>
     </p>
 
-    <form action="/payer" method="post" class="mb-4">
+    <form action="/payer" method="post" class="mb-4"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <div class="form-check mb-3">
         <input class="form-check-input" type="checkbox" id="cgv" name="cgv" value="ok" required>
         <label class="form-check-label" for="cgv">

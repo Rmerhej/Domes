@@ -23,9 +23,9 @@
                    <tr>
                       <td ><c:out value="${produit.nom_produit}" /></td>
                       <td>
-                        <form action="/articlesParRace" method="post">
-                           <input type="hidden" name="idCategorie" value=<c:out value="${produit.getCategorie().id_categorie}"/> />
-                           <input type="hidden" name="nomProduit" value=<c:out value="${produit.nom_produit}"/> />
+                        <form action="/articlesParRace" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                           <input type="hidden" name="idCategorie" value="<c:out value="${produit.categorie.id_categorie}"/>" />
+                           <input type="hidden" name="nomProduit" value="<c:out value="${produit.nom_produit}"/>" />
                           <button type="submit" class="btn btn-primary">Consulter</button>
                         </form>
                       </td>

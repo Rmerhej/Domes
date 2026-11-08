@@ -3,7 +3,9 @@
     import fr.greta92.Domes.entities.Client;
     import org.springframework.stereotype.Controller;
     import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.ui.Model;
     import org.springframework.web.bind.annotation.ModelAttribute;
+    import org.springframework.web.bind.annotation.RequestParam;
 
     @Controller
     public class AccueilController {
@@ -13,15 +15,25 @@
             return "redirect:/accueil";
         }
 
-       @GetMapping("/accueil")
-        public String goToAccueil(){
-            System.out.println("page index.jsp");
+        // ?connecte et ?deconnecte : ajoutés par Spring Security après connexion / déconnexion
+        @GetMapping("/accueil")
+        public String goToAccueil(@RequestParam(value = "connecte", required = false) String connecte,
+                                  @RequestParam(value = "deconnecte", required = false) String deconnecte,
+                                  Model model){
+            if (connecte != null) {
+                model.addAttribute("message", "Vous êtes connecté");
+                model.addAttribute("messageConnection", true);
+            }
+            if (deconnecte != null) {
+                model.addAttribute("deconnecte", "Vous êtes déconnecté");
+                model.addAttribute("dec", true);
+            }
             return "index";
         }
 
+        // La connexion elle-même (POST /connection) est traitée par Spring Security (SecurityConfig)
         @GetMapping("/seConnecter")
         public String connection(){
-            System.out.println("page connection.jsp");
             return "connection";
         }
 

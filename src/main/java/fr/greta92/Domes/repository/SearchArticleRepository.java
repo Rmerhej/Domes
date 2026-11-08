@@ -8,7 +8,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
     @Repository
     public interface SearchArticleRepository extends CrudRepository<Article, Integer> {
-        @Query(value = "SELECT * FROM article  join produit on article.id_categorie= :id_categorie AND produit.nom_produit= :nom_produit",nativeQuery = true)
+        // Articles d'une race (produit) donnée, dans une catégorie donnée.
+        // La jointure relie chaque article à SON produit (article.id_produit = produit.id_produit).
+        @Query(value = "SELECT a.* FROM article a "
+                     + "JOIN produit p ON a.id_produit = p.id_produit "
+                     + "WHERE p.id_categorie = :id_categorie AND p.nom_produit = :nom_produit",
+               nativeQuery = true)
         List<Article> findProduitByNom(@Param("id_categorie") String id_categorie,@Param("nom_produit") String nom_produit);
 
     }

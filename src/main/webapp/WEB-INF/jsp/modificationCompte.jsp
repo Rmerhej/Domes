@@ -14,7 +14,7 @@
           <div class="alert alert-danger"><c:out value="${erreur}"/></div>
         </c:if>
 
-        <form action="/modification" method="post">
+        <form action="/modification" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 
           <div class="mb-3">
             <label class="form-label" for="nom">NOM :</label>

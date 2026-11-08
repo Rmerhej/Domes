@@ -16,7 +16,7 @@
                <div class="card-body">
                  <h5 class="card-title"><c:out value="${article.nom_article}" /></h5>
                  <p class="card-text">Prix :<c:out value="${article.prix_unitaire_article}"/></p>
-                  <form action="/panier" method="post" modelAttribute="idPrPanier" >
+                  <form action="/panier" method="post" modelAttribute="idPrPanier" ><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input type="hidden" name="idArticle" value="<c:out value="${article.id_article}"/>" />
                         <label>Quantité :</label>
                         <input type="number" name="quantite" value="1" min="1"><br><br>

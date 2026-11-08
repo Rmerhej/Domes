@@ -31,16 +31,16 @@
                             data-bs-toggle="dropdown" data-bs-auto-close="true"
                             aria-expanded="false">CATÉGORIES</button>
                         <ul class="dropdown-menu">
-                            <li><form action="/tocateg?name=1" method="post"><button type="submit" class="dropdown-item"> CHIENS </button></form></li>
-                            <li><form action="/tocateg?name=2" method="post"><button type="submit" class="dropdown-item"> CHATS </button></form></li>
-                            <li><form action="/tocateg?name=4" method="post"><button type="submit" class="dropdown-item"> POISSONS </button></form></li>
-                            <li><form action="/tocateg?name=5" method="post"><button type="submit" class="dropdown-item"> REPTILES </button></form></li>
-                            <li><form action="/tocateg?name=6" method="post"><button type="submit" class="dropdown-item"> OISEAUX </button></form></li>
+                            <li><form action="/tocateg?name=1" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> CHIENS </button></form></li>
+                            <li><form action="/tocateg?name=2" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> CHATS </button></form></li>
+                            <li><form action="/tocateg?name=4" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> POISSONS </button></form></li>
+                            <li><form action="/tocateg?name=5" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> REPTILES </button></form></li>
+                            <li><form action="/tocateg?name=6" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="dropdown-item"> OISEAUX </button></form></li>
                         </ul>
                     </div>
                </div>
                <div class="col">
-                    <form action="/search" method="post"  class="d-flex">
+                    <form action="/search" method="post"  class="d-flex"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                       <div>
                         <input type="text" id="nom" name="search" path="articleRecherche" class="form-control me-2" placeholder="Rechercher"/>
                       </div>
@@ -62,7 +62,7 @@
                       <img src="images/bitcoin.png" height="25" width="25" alt="panier"></a>
 
                    <a href="/accueil"> <img src="images/home.svg" height="25" width="25" alt="maison"> </a>
-                   <a href="/deconnection"> <img src="images/logout.png" height="25" width="25" alt="boutonOff"> </a>
+                   <c:if test="${sessionScope.status == 'connected'}"><form action="/deconnection" method="post" class="d-inline"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" class="btn btn-link p-0 align-baseline" title="Se déconnecter"><img src="images/logout.png" height="25" width="25" alt="déconnexion"></button></form></c:if>
                </div>
             </div>
         </div>
@@ -142,31 +142,31 @@
         <div class="d-flex justify-content-between">
 
             <div>
-                <form action="/tocateg?name=4" method="post"><button type="submit">
+                <form action="/tocateg?name=4" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit">
                   <img alt="poisson" class="rounded" id="img1Index" src="images/Goldfish.jpg"> </button>
                 </form>
                 <p style="color: orange">poissons</p>
             </div>
             <div>
-               <form action="/tocateg?name=2" method="post"><button type="submit">
+               <form action="/tocateg?name=2" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit">
                   <img alt="chat" class="rounded" id="img2Index" src="images/the-red-or-white-cat-i-on-white-studio.jpg"> </button>
                </form>
                 <p style="color: orange">chats</p>
             </div>
             <div>
-               <form action="/tocateg?name=1" method="post"><button type="submit">
+               <form action="/tocateg?name=1" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit">
                    <img alt="chien" class="rounded" id="img3Index" width="75" height="75" src="images/pexels-chevanon-photography-1108099.jpg"> </button>
                </form>
                 <p style="color: orange">chiens</p>
             </div>
             <div>
-              <form action="/tocateg?name=6" method="post"><button type="submit" >
+              <form action="/tocateg?name=6" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit" >
                  <img alt="oiseau" class="rounded" id="img4Index"src="images/closeup-shot-of-male-hawfinch-sitting-on-branch.jpg"> </button>
               </form>
                 <p style="color: orange">oiseaux</p>
             </div>
             <div>
-            <form action="/tocateg?name=5" method="post"><button type="submit">
+            <form action="/tocateg?name=5" method="post"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/><button type="submit">
               <img alt="reptil" class="rounded" id="img5Index" src="images/green-lizard-on-branch-green-lizard-sunbathing-on-branch-green-lizard-climb-on-wood.jpg"
                  height="75" width="75"> </button>
             </form>
@@ -183,7 +183,7 @@
                     <div class="animal-name">Mignon</div>
                     <div class="animal-price">Prix unitaire : 150</div>
                 </div>
-                <form action="/catalogue" method="post" class="text-center">
+                <form action="/catalogue" method="post" class="text-center"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <button id="btn_card_index1" type="submit"  class="btn btn-outline-primary ">CONSULTER LE CATALOGUE</button>
                 </form>
             </div>
@@ -193,7 +193,7 @@
                   <div class="animal-name">Fou des océans</div>
                   <div class="animal-price">Prix :600</div>
                 </div>
-                 <form action="/catalogue" method="post" class="text-center">
+                 <form action="/catalogue" method="post" class="text-center"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                      <button type="submit"  class="btn btn-outline-secondary">CONSULTER LE CATALOGUE</button>
                  </form>
             </div>
@@ -203,7 +203,7 @@
                    <div class="animal-name">Fidel</div>
                    <div class="animal-price">Prix unitaire: 500.0</div>
                 </div>
-                <form action="/catalogue" method="post" class="text-center">
+                <form action="/catalogue" method="post" class="text-center"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                    <button type="submit"  class="btn btn-outline-danger">CONSULTER LE CATALOGUE</button>
                 </form>
             </div>
@@ -214,7 +214,7 @@
                    <div class="animal-name">Radio</div>
                    <div class="animal-price">Prix : 700.0</div>
                 </div>
-                 <form action="/catalogue" method="post" class="text-center">
+                 <form action="/catalogue" method="post" class="text-center"><input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                      <button type="submit"  class="btn btn-outline-warning">CONSULTER LE CATALOGUE</button>
                  </form>
             </div>

@@ -1,0 +1,6 @@
+# Copie ce fichier en "application-local.properties" (même dossier)
+# et remplis tes valeurs. Ce fichier-là est ignoré par Git.
+DB_USERNAME=roland
+DB_PASSWORD=ton_mot_de_passe_mysql
+MAIL_USERNAME=ton.adresse@gmail.com
+MAIL_PASSWORD=mot_de_passe_application_google

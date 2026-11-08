@@ -20,7 +20,7 @@
                         <td><c:out value="${article.nom_article}" /></td>
                         <td><c:out value="${article.prix_unitaire_article}"/></td>
                         <td><img src="<c:url value="${article.image_article}" />" height="75" width="75"/></td>
-                        <td><form action="/panier?name=${article.nom_article}" method="post"><button type="submit"><img src="images/bitcoin.png" height="25" width="25" alt="panier"></button></form></td>
+                        <td><form action="/panier" method="post"><input type="hidden" name="idArticle" value="<c:out value="${article.id_article}"/>"/><button type="submit"><img src="images/bitcoin.png" height="25" width="25" alt="panier"></button></form></td>
                         <td><a href="/achat" >	<img alt="carte de crédit"src="images/carte-bancaire.png"height="75" width="75"></a></td>
                     </tr>
                     </c:forEach>

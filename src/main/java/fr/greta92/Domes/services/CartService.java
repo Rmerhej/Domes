@@ -1,56 +1,93 @@
 package fr.greta92.Domes.services;
 
+import fr.greta92.Domes.entities.Article;
 import fr.greta92.Domes.entities.CartItem;
-import fr.greta92.Domes.entities.Produit;
-import fr.greta92.Domes.repository.ProduitRepository;
-import fr.greta92.Domes.repository.produitRepositoryImpl;
+import fr.greta92.Domes.repository.ArticleRepository;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Panier stocké dans la session HTTP : chaque visiteur a le sien.
+ *
+ * (L'ancien PanierService gardait une liste dans le service lui-même ;
+ * comme un @Service est unique pour toute l'application, tous les
+ * visiteurs partageaient le même panier.)
+ *
+ * Clé de la map = id de l'article. Après chaque modification on met à jour
+ * l'attribut de session "cartCount", affiché dans le header.
+ */
+@Service
 public class CartService {
-    private final ProduitRepository produitRepository=new produitRepositoryImpl();
+    static final String CART = "cart";
+    static final String CART_COUNT = "cartCount";
 
-    public void addToCart(HttpSession session, int produitId){
-        @SuppressWarnings("uncheked")
-                Map<Integer , CartItem> cart=(Map<Integer, CartItem>) session.getAttribute("cart");
+    private final ArticleRepository articleRepository;
 
-        if(cart==null){
-            cart=new LinkedHashMap<>();
-            session.setAttribute("cart",cart);
+    public CartService(ArticleRepository articleRepository) {
+        this.articleRepository = articleRepository;
+    }
 
+    /** @return false si l'article n'existe pas */
+    public boolean addToCart(HttpSession session, int idArticle, int quantite) {
+        Article article = articleRepository.findById(idArticle).orElse(null);
+        if (article == null) {
+            return false;
         }
-
-        if (cart.containsKey(produitId)) {
-            cart.get(produitId).incrementQuantite();
+        Map<Integer, CartItem> cart = getOrCreateCart(session);
+        CartItem item = cart.get(idArticle);
+        if (item == null) {
+            cart.put(idArticle, new CartItem(article, quantite));
         } else {
-            Produit produit = produitRepository.findById(produitId);
-            if (produit != null) {
-                cart.put(produitId, new CartItem(produit));
-            }
+            item.ajouterQuantite(quantite);
         }
+        refreshCount(session, cart);
+        return true;
+    }
+
+    public void removeItem(HttpSession session, int idArticle) {
+        Map<Integer, CartItem> cart = getOrCreateCart(session);
+        cart.remove(idArticle);
+        refreshCount(session, cart);
+    }
+
+    public void clearCart(HttpSession session) {
+        session.removeAttribute(CART);
+        session.removeAttribute(CART_COUNT);
+    }
+
+    public Collection<CartItem> getItems(HttpSession session) {
+        Map<Integer, CartItem> cart = readCart(session);
+        return cart != null ? cart.values() : Collections.emptyList();
     }
 
     public int getCartItemCount(HttpSession session) {
-        @SuppressWarnings("unchecked")
-        Map<Integer, CartItem> cart = (Map<Integer, CartItem>) session.getAttribute("cart");
-
-        if (cart == null) return 0;
-
-        return cart.values().stream()
-                .mapToInt(CartItem::getQuantite)
-                .sum();
+        return getItems(session).stream().mapToInt(CartItem::getQuantite).sum();
     }
 
-    public Map<Integer, CartItem> getCart(HttpSession session) {
-        @SuppressWarnings("unchecked")
-        Map<Integer, CartItem> cart = (Map<Integer, CartItem>) session.getAttribute("cart");
-        return cart != null ? cart : Collections.emptyMap();
+    public double getTotal(HttpSession session) {
+        return getItems(session).stream().mapToDouble(CartItem::getSousTotal).sum();
     }
 
-    // Future methods: removeItem, updateQuantity, clearCart, getTotalAmount...
+    @SuppressWarnings("unchecked")
+    private Map<Integer, CartItem> readCart(HttpSession session) {
+        return (Map<Integer, CartItem>) session.getAttribute(CART);
+    }
+
+    private Map<Integer, CartItem> getOrCreateCart(HttpSession session) {
+        Map<Integer, CartItem> cart = readCart(session);
+        if (cart == null) {
+            cart = new LinkedHashMap<>();
+            session.setAttribute(CART, cart);
+        }
+        return cart;
+    }
+
+    private void refreshCount(HttpSession session, Map<Integer, CartItem> cart) {
+        session.setAttribute(CART_COUNT, cart.values().stream().mapToInt(CartItem::getQuantite).sum());
+    }
 }
-
-

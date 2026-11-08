@@ -44,11 +44,17 @@
             clientRepository.save(client);
                return "newCompte";
         }
+        /**
+         * Vérifie le couple login / mot de passe.
+         * Le mot de passe est stocké haché (BCrypt) : on ne peut pas le comparer en SQL,
+         * il faut récupérer le client puis utiliser passwordEncoder.matches().
+         */
         public boolean clientExist(Client client) throws Exception{
-            if(clientRepository.existsByLoginAndMdp(client.getLogin(),client.getMdp())){
-                return true;
+            if (client.getLogin() == null || client.getMdp() == null) {
+                return false;
             }
-            return false;
+            Client enBase = clientRepository.findByLogin(client.getLogin());
+            return enBase != null && passwordEncoder.matches(client.getMdp(), enBase.getMdp());
         }
        public Client findClient(String login){
            Client client = clientRepository.findByLogin(login);

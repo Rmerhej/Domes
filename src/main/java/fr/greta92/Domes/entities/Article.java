@@ -2,6 +2,7 @@ package fr.greta92.Domes.entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +14,7 @@ public class Article {
     private int id_article;
     @NotEmpty(message = "ce champ ne doit pas être vide")
     private String nom_article;
-    @NotEmpty(message = "ce champ ne doit pas être vide")
+    @NotNull(message = "ce champ ne doit pas être vide")
     private Double prix_unitaire_article;
     @NotEmpty(message = "ce champ ne doit pas être vide")
     private String image_article;

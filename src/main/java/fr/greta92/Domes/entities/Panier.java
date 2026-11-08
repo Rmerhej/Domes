@@ -1,7 +1,7 @@
 package fr.greta92.Domes.entities;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +12,7 @@ public class Panier {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_panier;
-    @NotEmpty(message = "ce champ ne doit pas être vide")
+    @NotNull(message = "ce champ ne doit pas être vide")
     private Date date_panier;
     @ManyToOne
     @JoinColumn(name = "id_client")

@@ -52,7 +52,7 @@
                    <a href="/seConnecter">
                       <img alt="représentation personne" src="images/homme.png" height="25" width="25"> </a>
 
-                    <a href="/iconConsultationPanier">
+                    <a href="/panier">
                       <img src="images/bitcoin.png" height="25" width="25" alt="panier"></a>
 
                    <a href="/accueil"> <img src="images/home.svg" height="25" width="25" alt="maison"> </a>

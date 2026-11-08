@@ -23,8 +23,6 @@
             List<Article>articles;
             articles=articleRepository.searchArticleByName(name);
             System.out.println("liste "+articles.toString());
-            System.out.println(articles.get(0).getNom_article());
-            System.out.println(articles.get(0).getPrix_unitaire_article());
             model.addAttribute("articles",articles);
             return  "articleRecherche";
         }

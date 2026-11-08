@@ -5,6 +5,8 @@
 
         <h1 class="text-center" style="color:orange">Modifier mes coordonnées</h1>
 
+        <p class="text-center"><a href="/mesCommandes" class="btn btn-outline-secondary btn-sm">Voir mes commandes</a></p>
+
         <c:if test="${not empty succes}">
           <div class="alert alert-success"><c:out value="${succes}"/></div>
         </c:if>

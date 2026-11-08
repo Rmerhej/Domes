@@ -48,16 +48,7 @@
             return "nousContacter";
         }
    
-        @GetMapping("/achat")
-        public String goToAchat(){
-            System.out.println("page achat.jsp");
-            return "achat";
-        }
-        @GetMapping("/payer")
-        public String goTopaiement(){
-            System.out.println("page paiement.jsp");
-            return "paiement";
-        }
+        // /achat et /payer : voir CommandeController
 
         @GetMapping("/cgv")
         public String goToCgv(){

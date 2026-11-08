@@ -30,6 +30,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
+                // espace administrateur : rôle ADMIN (logins listés dans ADMIN_LOGINS)
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 // pages réservées aux clients connectés
                 .antMatchers(HttpMethod.POST, "/panier").authenticated()   // ajouter au panier
                 .antMatchers("/achat", "/payer", "/commande/**", "/mesCommandes",

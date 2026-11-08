@@ -8,3 +8,6 @@ MAIL_USERNAME=
 MAIL_PASSWORD=
 # Optionnel : adresse qui reçoit les messages "Nous contacter" (par défaut MAIL_USERNAME)
 CONTACT_EMAIL=
+
+# Logins administrateurs, séparés par des virgules (accès à /admin), ex. roland
+ADMIN_LOGINS=

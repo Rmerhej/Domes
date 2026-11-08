@@ -42,3 +42,15 @@ INSERT IGNORE INTO article (id_article, nom_article, prix_unitaire_article, imag
   (7, 'Kiwi',    80.00, 'images/green-lizard-on-branch-green-lizard-sunbathing-on-branch-green-lizard-climb-on-wood.jpg', 7, 5),
   (8, 'Titi',    45.00, 'images/Canari.jpg', 8, 6),
   (9, 'Pépite',  60.00, 'images/closeup-shot-of-male-hawfinch-sitting-on-branch.jpg', 9, 6);
+
+-- Descriptions affichées sur les fiches (seulement si elles sont encore vides,
+-- pour ne jamais écraser un texte saisi dans l'espace administrateur)
+UPDATE article SET description = 'Fidel est un jeune berger allemand vif et attentif. Il adore les longues promenades et apprend vite : idéal pour une famille sportive avec un jardin.' WHERE id_article = 1 AND description IS NULL;
+UPDATE article SET description = 'Rocky est un chiot rottweiler calme et câlin. Il a besoin d''un maître présent et d''une éducation douce mais régulière.' WHERE id_article = 2 AND description IS NULL;
+UPDATE article SET description = 'Mignon est un persan au long pelage soyeux. D''un tempérament paisible, il apprécie la vie en appartement et un brossage quotidien.' WHERE id_article = 3 AND description IS NULL;
+UPDATE article SET description = 'Caramel, chat européen roux, est joueur et curieux. Il s''entend bien avec les enfants.' WHERE id_article = 4 AND description IS NULL;
+UPDATE article SET description = 'Gaspar est un poisson rouge robuste, parfait pour débuter en aquariophilie. Prévoyez un aquarium filtré d''au moins 60 litres.' WHERE id_article = 5 AND description IS NULL;
+UPDATE article SET description = 'Nemo est un scalaire élégant aux longues nageoires. Il vit en aquarium tropical planté, avec une eau autour de 26 °C.' WHERE id_article = 6 AND description IS NULL;
+UPDATE article SET description = 'Kiwi est un lézard vert actif le jour. Il a besoin d''un terrarium chauffé avec une lampe UV et des branches pour grimper.' WHERE id_article = 7 AND description IS NULL;
+UPDATE article SET description = 'Titi est un canari chanteur et facile à vivre. Une grande cage lumineuse et des graines variées feront son bonheur.' WHERE id_article = 8 AND description IS NULL;
+UPDATE article SET description = 'Pépite est un gros-bec au bec puissant. Discret et sociable, il se plaît en volière avec d''autres oiseaux.' WHERE id_article = 9 AND description IS NULL;

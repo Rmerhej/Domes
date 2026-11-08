@@ -18,6 +18,10 @@ public class Article {
     private Double prix_unitaire_article;
     @NotEmpty(message = "ce champ ne doit pas être vide")
     private String image_article;
+    // Texte de présentation affiché sur la fiche de l'animal (facultatif)
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "id_produit", referencedColumnName = "id_produit")
     private Produit produit;
@@ -47,6 +51,14 @@ public class Article {
 
     public void setNom_article(String nom_article) {
         this.nom_article = nom_article;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrix_unitaire_article() {

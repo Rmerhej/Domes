@@ -37,6 +37,7 @@ services:
       MAIL_USERNAME: ${MAIL_USERNAME:-}
       MAIL_PASSWORD: ${MAIL_PASSWORD:-}
       CONTACT_EMAIL: ${CONTACT_EMAIL:-}
+      ADMIN_LOGINS: ${ADMIN_LOGINS:-}
     depends_on:
       db:
         condition: service_healthy

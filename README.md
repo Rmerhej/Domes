@@ -11,6 +11,8 @@ Projet de formation (GRETA 92) : boutique en ligne d'animaux de compagnie.
 - Panier en session (quantités, sous-totaux, total)
 - Commande avec paiement **simulé** (aucune donnée bancaire), confirmation et historique « Mes commandes »
 - Formulaire de contact par e-mail
+- Fiche détaillée de chaque animal
+- Espace administrateur (`/admin`) : ajout, modification et suppression des animaux
 
 ## Lancer le projet
 
@@ -48,6 +50,14 @@ Prérequis : JDK 11+, MySQL démarré, une base vide nommée `domesservice`.
 Les tables sont créées et mises à jour automatiquement par Hibernate
 (`spring.jpa.hibernate.ddl-auto=update`).
 
+## Tests
+
+```bash
+./mvnw test      # Windows : mvnw.cmd test
+```
+
+Les tests utilisent une base H2 en mémoire : ni MySQL ni WAMP ne sont nécessaires.
+
 ## Configuration
 
 Aucun mot de passe n'est écrit dans le code. `application.properties` lit ces variables
@@ -62,6 +72,7 @@ Aucun mot de passe n'est écrit dans le code. `application.properties` lit ces v
 | `MAIL_USERNAME` | Compte Gmail d'envoi                   | *(vide)*                                        |
 | `MAIL_PASSWORD` | Mot de passe d'application Google      | *(vide)*                                        |
 | `CONTACT_EMAIL` | Destinataire du formulaire de contact  | `MAIL_USERNAME`                                 |
+| `ADMIN_LOGINS`  | Logins administrateurs (accès `/admin`) | *(vide : aucun)*                               |
 
 ## Organisation du code
 

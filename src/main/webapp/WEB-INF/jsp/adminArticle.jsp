@@ -14,7 +14,7 @@
     </c:if>
 
     <%-- <form:form> ajoute le jeton CSRF et réaffiche les valeurs saisies --%>
-    <form:form method="post" action="/admin/articles/enregistrer" modelAttribute="article">
+    <form:form method="post" action="/admin/articles/enregistrer" modelAttribute="article" enctype="multipart/form-data">
       <form:hidden path="id"/>
       <div class="row g-3">
         <div class="col-sm-7">
@@ -45,13 +45,19 @@
         </div>
 
         <div class="col-sm-7">
-          <label class="form-label" for="image">Photo</label>
+          <label class="form-label" for="fichierPhoto">Envoyer une photo</label>
+          <input class="form-control" type="file" id="fichierPhoto" name="fichierPhoto"
+                 accept="image/jpeg,image/png,image/webp" aria-describedby="aide-envoi">
+          <div class="form-text" id="aide-envoi">JPEG, PNG ou WebP, 5 Mo maximum.</div>
+          <div class="invalid-feedback d-block" id="erreur-envoi" role="alert"></div>
+
+          <label class="form-label mt-3" for="image">Ou choisir une photo déjà disponible</label>
           <form:input path="image" id="image" list="photos" cssClass="form-control" cssErrorClass="form-control is-invalid"
                       placeholder="images/Mon-animal.jpg" aria-describedby="aide-photo"/>
           <datalist id="photos">
             <c:forEach var="photo" items="${photos}"><option value="<c:out value="${photo}"/>"></c:forEach>
           </datalist>
-          <div class="form-text" id="aide-photo">Choisissez une photo du dossier static/images.</div>
+          <div class="form-text" id="aide-photo">Cliquez dans le champ pour voir la liste. Une photo envoyée est prioritaire.</div>
           <form:errors path="image" cssClass="invalid-feedback d-block"/>
         </div>
         <div class="col-sm-5">
@@ -75,12 +81,33 @@
 </div>
 
 <script>
-  // Aperçu de la photo quand on change le chemin
+  // Aperçu de la photo, et refus immédiat d'un fichier trop lourd
   (function () {
-    var champ = document.getElementById('image'), apercu = document.getElementById('apercu');
+    var TAILLE_MAX = 5 * 1024 * 1024;
+    var champ = document.getElementById('image'),
+        fichier = document.getElementById('fichierPhoto'),
+        erreur = document.getElementById('erreur-envoi'),
+        apercu = document.getElementById('apercu'),
+        url = null;
+
     champ.addEventListener('input', function () {
+      if (fichier.files.length) { return; }   // la photo envoyée reste prioritaire
       var valeur = champ.value.trim();
       apercu.src = valeur ? '/' + valeur.replace(/^\/+/, '') : '';
+    });
+
+    fichier.addEventListener('change', function () {
+      erreur.textContent = '';
+      if (url) { URL.revokeObjectURL(url); url = null; }
+      var f = fichier.files[0];
+      if (!f) { return; }
+      if (f.size > TAILLE_MAX) {
+        erreur.textContent = 'Cette photo dépasse 5 Mo. Choisissez une image plus légère.';
+        fichier.value = '';
+        return;
+      }
+      url = URL.createObjectURL(f);
+      apercu.src = url;
     });
   })();
 </script>

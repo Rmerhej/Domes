@@ -27,7 +27,8 @@ public class ArticleForm {
     @DecimalMax(value = "100000", message = "Le prix semble trop élevé.")
     private Double prix;
 
-    @NotBlank(message = "Choisissez une photo.")
+    // Facultatif ici : on peut aussi envoyer un fichier (contrôle dans AdminController)
+    @Size(max = 255, message = "Chemin trop long.")
     private String image;
 
     @NotNull(message = "Choisissez une race.")

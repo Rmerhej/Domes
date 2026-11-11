@@ -6,12 +6,17 @@ import fr.greta92.Domes.services.CommandeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.mock.web.MockMultipartFile;
+import fr.greta92.Domes.admin.StockagePhotos;
+
+import java.nio.file.Files;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.flash;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -25,6 +30,9 @@ class AdminTest extends TestAvecDonnees {
 
     @Autowired
     private CommandeService commandeService;
+
+    @Autowired
+    private StockagePhotos stockagePhotos;
 
     @Test
     void unVisiteurEstRenvoyeVersLaConnexion() throws Exception {
@@ -100,5 +108,56 @@ class AdminTest extends TestAvecDonnees {
                 .andExpect(redirectedUrl("/admin"))
                 .andExpect(flash().attributeExists("erreur"));
         assertThat(articleRepository.findById(fidel.getId_article())).isPresent();
+    }
+
+    // ---------- Envoi de photos ----------
+
+    /** Début d'un vrai fichier JPEG : la signature FF D8 FF suffit à le reconnaître. */
+    private static final byte[] JPEG = {(byte) 0xFF, (byte) 0xD8, (byte) 0xFF, (byte) 0xE0, 0, 0x10, 'J', 'F', 'I', 'F', 0, 1};
+
+    @Test
+    void ladministrateurEnvoieUnePhoto() throws Exception {
+        MockHttpSession session = connecter("admin", "admin123");
+        MockMultipartFile photo = new MockMultipartFile("fichierPhoto", "rex.jpg", "image/jpeg", JPEG);
+
+        mvc.perform(multipart("/admin/articles/enregistrer").file(photo).session(session).with(csrf())
+                        .param("nom", "Rex")
+                        .param("prix", "350")
+                        .param("image", "")
+                        .param("idProduit", String.valueOf(berger.getId_produit())))
+                .andExpect(redirectedUrl("/admin"));
+
+        String chemin = articleRepository.searchArticleByName("Rex").get(0).getImage_article();
+        // nom aléatoire, jamais celui envoyé par l'utilisateur
+        assertThat(chemin).startsWith("uploads/").endsWith(".jpg").doesNotContain("rex");
+        assertThat(Files.exists(stockagePhotos.getDossier().resolve(chemin.substring("uploads/".length())))).isTrue();
+    }
+
+    @Test
+    void unFichierQuiNestPasUnePhotoEstRefuse() throws Exception {
+        MockHttpSession session = connecter("admin", "admin123");
+        // un texte déguisé en .jpg : refusé grâce au contrôle du contenu
+        MockMultipartFile faux = new MockMultipartFile("fichierPhoto", "photo.jpg", "image/jpeg", "bonjour".getBytes());
+
+        mvc.perform(multipart("/admin/articles/enregistrer").file(faux).session(session).with(csrf())
+                        .param("nom", "Rex")
+                        .param("prix", "350")
+                        .param("idProduit", String.valueOf(berger.getId_produit())))
+                .andExpect(status().isOk())
+                .andExpect(view().name("adminArticle"))
+                .andExpect(model().attributeHasFieldErrors("article", "image"));
+        assertThat(articleRepository.searchArticleByName("Rex")).isEmpty();
+    }
+
+    @Test
+    void sansPhotoNiFichierLeFormulaireEstReaffiche() throws Exception {
+        MockHttpSession session = connecter("admin", "admin123");
+        mvc.perform(post("/admin/articles/enregistrer").session(session).with(csrf())
+                        .param("nom", "Rex")
+                        .param("prix", "350")
+                        .param("image", "")
+                        .param("idProduit", String.valueOf(berger.getId_produit())))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeHasFieldErrors("article", "image"));
     }
 }

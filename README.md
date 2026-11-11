@@ -1,5 +1,7 @@
 # Domes — animalerie en ligne
 
+[![CI](https://github.com/Rmerhej/Domes/actions/workflows/ci.yml/badge.svg)](https://github.com/Rmerhej/Domes/actions/workflows/ci.yml)
+
 Projet de formation (GRETA 92) : boutique en ligne d'animaux de compagnie.
 
 **Stack :** Java 11 · Spring Boot 2.7 · Spring MVC + JSP/JSTL · Spring Data JPA (Hibernate) · MySQL 8 · Bootstrap 5
@@ -12,7 +14,7 @@ Projet de formation (GRETA 92) : boutique en ligne d'animaux de compagnie.
 - Commande avec paiement **simulé** (aucune donnée bancaire), confirmation et historique « Mes commandes »
 - Formulaire de contact par e-mail
 - Fiche détaillée de chaque animal
-- Espace administrateur (`/admin`) : ajout, modification et suppression des animaux
+- Espace administrateur (`/admin`) : ajout, modification et suppression des animaux, envoi de photos
 
 ## Lancer le projet
 
@@ -58,6 +60,9 @@ Les tables sont créées et mises à jour automatiquement par Hibernate
 
 Les tests utilisent une base H2 en mémoire : ni MySQL ni WAMP ne sont nécessaires.
 
+Ils sont aussi lancés automatiquement par GitHub Actions à chaque pull request et à chaque
+push sur `main`, avec une vérification de l'image Docker (`.github/workflows/ci.yml`).
+
 ## Configuration
 
 Aucun mot de passe n'est écrit dans le code. `application.properties` lit ces variables
@@ -72,6 +77,7 @@ Aucun mot de passe n'est écrit dans le code. `application.properties` lit ces v
 | `MAIL_USERNAME` | Compte Gmail d'envoi                   | *(vide)*                                        |
 | `MAIL_PASSWORD` | Mot de passe d'application Google      | *(vide)*                                        |
 | `CONTACT_EMAIL` | Destinataire du formulaire de contact  | `MAIL_USERNAME`                                 |
+| `UPLOADS_DIR`   | Dossier des photos envoyées par l'admin | `uploads`                                      |
 | `ADMIN_LOGINS`  | Logins administrateurs (accès `/admin`) | *(vide : aucun)*                               |
 
 ## Organisation du code

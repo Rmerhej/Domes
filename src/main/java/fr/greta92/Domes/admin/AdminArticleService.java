@@ -24,10 +24,13 @@ public class AdminArticleService {
 
     private final ArticleRepository articleRepository;
     private final ProduitRepository produitRepository;
+    private final StockagePhotos stockagePhotos;
 
-    public AdminArticleService(ArticleRepository articleRepository, ProduitRepository produitRepository) {
+    public AdminArticleService(ArticleRepository articleRepository, ProduitRepository produitRepository,
+                               StockagePhotos stockagePhotos) {
         this.articleRepository = articleRepository;
         this.produitRepository = produitRepository;
+        this.stockagePhotos = stockagePhotos;
     }
 
     public List<Article> tousLesArticles() {
@@ -68,7 +71,10 @@ public class AdminArticleService {
             // Liste impossible (ex. nom de fichier accentué sur un système sans UTF-8) :
             // le formulaire reste utilisable, l'administrateur saisit le chemin à la main
         }
-        return new ArrayList<>(photos);
+        // Les photos envoyées depuis l'admin d'abord, puis celles fournies avec le site
+        List<String> toutes = new ArrayList<>(stockagePhotos.photosEnvoyees());
+        toutes.addAll(photos);
+        return toutes;
     }
 
     /**
@@ -86,6 +92,7 @@ public class AdminArticleService {
                 : articleRepository.findById(form.getId())
                     .orElseThrow(() -> new IllegalArgumentException("Cet animal n'existe plus."));
 
+        String anciennePhoto = article.getImage_article();
         article.setNom_article(form.getNom().trim());
         article.setPrix_unitaire_article(form.getPrix());
         article.setImage_article(form.getImage().trim());
@@ -93,7 +100,11 @@ public class AdminArticleService {
                 ? null : form.getDescription().trim());
         article.setProduit(race);
         article.setCategorie(race.getCategorie());   // l'espèce découle de la race
-        return articleRepository.save(article);
+        Article enregistre = articleRepository.save(article);
+        if (anciennePhoto != null && !anciennePhoto.equals(enregistre.getImage_article())) {
+            supprimerPhotoSiInutilisee(anciennePhoto);
+        }
+        return enregistre;
     }
 
     /**
@@ -111,5 +122,14 @@ public class AdminArticleService {
                     + " » figure dans des commandes : il ne peut pas être supprimé.");
         }
         articleRepository.delete(article);
+        supprimerPhotoSiInutilisee(article.getImage_article());
+    }
+
+    /** Une photo envoyée qu'aucun animal n'utilise plus est effacée du disque. */
+    private void supprimerPhotoSiInutilisee(String chemin) {
+        if (chemin != null && chemin.startsWith(StockagePhotos.PREFIXE)
+                && articleRepository.nombreParPhoto(chemin) == 0) {
+            stockagePhotos.supprimer(chemin);
+        }
     }
 }

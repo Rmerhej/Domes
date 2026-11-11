@@ -38,9 +38,13 @@ services:
       MAIL_PASSWORD: ${MAIL_PASSWORD:-}
       CONTACT_EMAIL: ${CONTACT_EMAIL:-}
       ADMIN_LOGINS: ${ADMIN_LOGINS:-}
+    volumes:
+      # photos envoyées depuis l'admin : conservées entre deux "docker compose up --build"
+      - domes-uploads:/app/uploads
     depends_on:
       db:
         condition: service_healthy
 
 volumes:
   domes-data:
+  domes-uploads:

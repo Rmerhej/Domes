@@ -15,6 +15,10 @@
         @Query("select count(l) from LigneCommande l where l.article.id_article = :idArticle")
         long nombreDeLignesCommande(@Param("idArticle") int idArticle);
 
+        // Nombre d'animaux qui utilisent cette photo (avant d'effacer un fichier envoyé)
+        @Query("select count(a) from Article a where a.image_article = :image")
+        long nombreParPhoto(@Param("image") String image);
+
         // Tous les animaux d'une catégorie (chiens, chats...)
         @Query("select a from Article a where a.categorie.id_categorie = :idCategorie order by a.nom_article")
         List<Article> findByCategorie(@Param("idCategorie") int idCategorie);

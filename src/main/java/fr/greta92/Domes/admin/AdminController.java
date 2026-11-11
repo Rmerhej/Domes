@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 /**
  * Espace administrateur (rôle ADMIN, voir SecurityConfig) :
@@ -24,9 +27,11 @@ import javax.validation.Valid;
 public class AdminController {
 
     private final AdminArticleService service;
+    private final StockagePhotos stockagePhotos;
 
-    public AdminController(AdminArticleService service) {
+    public AdminController(AdminArticleService service, StockagePhotos stockagePhotos) {
         this.service = service;
+        this.stockagePhotos = stockagePhotos;
     }
 
     @GetMapping("/admin")
@@ -52,10 +57,32 @@ public class AdminController {
 
     @PostMapping("/admin/articles/enregistrer")
     public String enregistrer(@Valid @ModelAttribute("article") ArticleForm form, BindingResult erreurs,
+                              @RequestParam(value = "fichierPhoto", required = false) MultipartFile fichier,
                               Model model, RedirectAttributes redirect) {
+        boolean fichierEnvoye = fichier != null && !fichier.isEmpty();
+        if (!fichierEnvoye && (form.getImage() == null || form.getImage().isBlank())) {
+            erreurs.rejectValue("image", "manquante", "Envoyez une photo ou choisissez-en une déjà disponible.");
+        }
         if (erreurs.hasErrors()) {
             return formulaire(form, model);   // on réaffiche le formulaire avec les messages
         }
+
+        // 1. La photo envoyée (si il y en a une) remplace le chemin choisi
+        String photoEnvoyee = null;
+        if (fichierEnvoye) {
+            try {
+                photoEnvoyee = stockagePhotos.enregistrer(fichier);
+                form.setImage(photoEnvoyee);
+            } catch (IllegalArgumentException e) {
+                erreurs.rejectValue("image", "fichier", e.getMessage());
+                return formulaire(form, model);
+            } catch (IOException e) {
+                model.addAttribute("erreur", "La photo n'a pas pu être enregistrée sur le serveur. Réessayez.");
+                return formulaire(form, model);
+            }
+        }
+
+        // 2. L'animal
         try {
             boolean nouveau = form.isNouveau();
             service.enregistrer(form);
@@ -63,6 +90,7 @@ public class AdminController {
                     + (nouveau ? "ajouté." : "modifié."));
             return "redirect:/admin";
         } catch (IllegalArgumentException e) {
+            stockagePhotos.supprimer(photoEnvoyee);   // pas de fichier orphelin
             model.addAttribute("erreur", e.getMessage());
             return formulaire(form, model);
         }

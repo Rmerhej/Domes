@@ -12,7 +12,7 @@ Projet de formation (GRETA 92) : boutique en ligne d'animaux de compagnie.
 - Commande avec paiement **simulé** (aucune donnée bancaire), confirmation et historique « Mes commandes »
 - Formulaire de contact par e-mail
 - Fiche détaillée de chaque animal
-- Espace administrateur (`/admin`) : ajout, modification et suppression des animaux
+- Espace administrateur (`/admin`) : ajout, modification et suppression des animaux, envoi de photos
 
 ## Lancer le projet
 
@@ -72,6 +72,7 @@ Aucun mot de passe n'est écrit dans le code. `application.properties` lit ces v
 | `MAIL_USERNAME` | Compte Gmail d'envoi                   | *(vide)*                                        |
 | `MAIL_PASSWORD` | Mot de passe d'application Google      | *(vide)*                                        |
 | `CONTACT_EMAIL` | Destinataire du formulaire de contact  | `MAIL_USERNAME`                                 |
+| `UPLOADS_DIR`   | Dossier des photos envoyées par l'admin | `uploads`                                      |
 | `ADMIN_LOGINS`  | Logins administrateurs (accès `/admin`) | *(vide : aucun)*                               |
 
 ## Organisation du code

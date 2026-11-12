@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -35,13 +36,16 @@ public class PanierController {
     @PostMapping("/panier")
     public String ajouterAuPanier(@RequestParam("idArticle") int idArticle,
                                   @RequestParam(value = "quantite", defaultValue = "1") int quantite,
-                                  HttpSession session, Model model) {
+                                  HttpSession session, Model model, RedirectAttributes redirect) {
         if (!"connected".equals(session.getAttribute("status"))) {
             model.addAttribute("nonConnecte", "Veuillez vous connecter si vous avez un compte, sinon créez-en un");
             model.addAttribute("notConnected", true);
             return "index";
         }
-        cartService.addToCart(session, idArticle, quantite);
+        if (!cartService.addToCart(session, idArticle, quantite)) {
+            redirect.addFlashAttribute("erreur", "Cet animal n'est plus disponible : il a déjà été adopté.");
+            return "redirect:/animal/" + idArticle;
+        }
         // Redirection (pattern Post/Redirect/Get) : un F5 ne rajoute pas l'article une 2e fois
         return "redirect:/panier";
     }

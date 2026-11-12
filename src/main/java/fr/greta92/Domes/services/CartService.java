@@ -32,10 +32,10 @@ public class CartService {
         this.articleRepository = articleRepository;
     }
 
-    /** @return false si l'article n'existe pas */
+    /** @return false si l'article n'existe pas ou n'est plus en vente (déjà adopté) */
     public boolean addToCart(HttpSession session, int idArticle, int quantite) {
         Article article = articleRepository.findById(idArticle).orElse(null);
-        if (article == null) {
+        if (article == null || !article.isDisponible()) {
             return false;
         }
         Map<Integer, CartItem> cart = getOrCreateCart(session);

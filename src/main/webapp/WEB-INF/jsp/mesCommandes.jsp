@@ -32,7 +32,7 @@
                 <td><c:out value="${commande.id}"/></td>
                 <td><c:out value="${commande.dateFormatee}"/></td>
                 <td><c:out value="${commande.nombreArticles}"/></td>
-                <td><c:out value="${commande.statut.libelle}"/></td>
+                <td><span class="etiquette statut-${commande.statut}"><c:out value="${commande.statut.libelle}"/></span></td>
                 <td class="text-end"><fmt:formatNumber value="${commande.montantTotal}" type="currency" currencyCode="EUR"/></td>
                 <td class="text-end"><a href="/commande/confirmation?id=<c:out value="${commande.id}"/>">Détail<span class="visually-hidden"> de la commande <c:out value="${commande.id}"/></span></a></td>
               </tr>

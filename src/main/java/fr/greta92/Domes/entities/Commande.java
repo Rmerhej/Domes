@@ -83,6 +83,19 @@ public class Commande {
         return statut;
     }
 
+    /**
+     * Fait avancer la commande (espace admin).
+     *
+     * @throws IllegalStateException si ce changement n'est pas permis (ex. livrée -> payée)
+     */
+    public void changerStatut(StatutCommande nouveau) {
+        if (nouveau == null || !statut.peutPasserA(nouveau)) {
+            throw new IllegalStateException("La commande n° " + id + " ne peut pas passer de « "
+                    + statut.getLibelle() + " » à « " + (nouveau != null ? nouveau.getLibelle() : "?") + " ».");
+        }
+        this.statut = nouveau;
+    }
+
     public double getMontantTotal() {
         return montantTotal;
     }

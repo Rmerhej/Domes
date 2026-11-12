@@ -30,4 +30,11 @@ public interface CommandeRepository extends CrudRepository<Commande, Integer> {
          + "where c.client.id_client = :idClient "
          + "order by c.dateCommande desc")
     List<Commande> findAvecLignesParClient(@Param("idClient") int idClient);
+
+    /** Toutes les commandes (espace admin), avec client, lignes et animaux. */
+    @Query("select distinct c from Commande c "
+         + "join fetch c.client "
+         + "left join fetch c.lignes l left join fetch l.article "
+         + "order by c.dateCommande desc")
+    List<Commande> findAllAvecLignes();
 }

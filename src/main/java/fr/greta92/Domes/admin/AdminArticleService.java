@@ -98,6 +98,7 @@ public class AdminArticleService {
         article.setImage_article(form.getImage().trim());
         article.setDescription(form.getDescription() == null || form.getDescription().isBlank()
                 ? null : form.getDescription().trim());
+        article.setDisponible(form.isDisponible());
         article.setProduit(race);
         article.setCategorie(race.getCategorie());   // l'espèce découle de la race
         Article enregistre = articleRepository.save(article);

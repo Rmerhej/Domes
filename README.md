@@ -15,6 +15,8 @@ Projet de formation (GRETA 92) : boutique en ligne d'animaux de compagnie.
 - Formulaire de contact par e-mail
 - Fiche détaillée de chaque animal
 - Espace administrateur (`/admin`) : ajout, modification et suppression des animaux, envoi de photos
+- Suivi des commandes par l'administrateur (`/admin/commandes`) : filtre par statut, passage de « payée » à « expédiée » puis « livrée », ou annulation
+- Disponibilité : un animal acheté est marqué « Adopté » et retiré de la vente ; il revient en vente si la commande est annulée
 
 ## Lancer le projet
 

@@ -1,5 +1,5 @@
 # ---------- Étape 1 : compilation avec Maven ----------
-FROM maven:3.9-eclipse-temurin-11 AS build
+FROM maven:3.9-eclipse-temurin-21 AS build
 WORKDIR /app
 
 # On copie d'abord le pom seul : tant qu'il ne change pas, Docker garde
@@ -11,7 +11,7 @@ COPY src ./src
 RUN mvn -q -B package -DskipTests
 
 # ---------- Étape 2 : image d'exécution, légère (Java seul, sans Maven) ----------
-FROM eclipse-temurin:11-jre
+FROM eclipse-temurin:21-jre
 WORKDIR /app
 
 # UTF-8 : accents corrects dans les logs et dans les noms de fichiers

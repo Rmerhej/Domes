@@ -1,14 +1,16 @@
     package fr.greta92.Domes.entities;
 
-    import javax.persistence.*;
-    import javax.validation.constraints.NotEmpty;
+    import jakarta.persistence.*;
+    import jakarta.validation.constraints.NotEmpty;
     import java.util.Objects;
 
     @Entity
     public class Produit {
 
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        // Compteur commun "hibernate_sequence", comme avant la migration (voir AlignementIdentifiants)
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_produit")
+        @SequenceGenerator(name = "seq_produit", sequenceName = "hibernate_sequence", allocationSize = 1)
         private int id_produit;
         @NotEmpty(message = "ce champ ne doit pas être vide")
         private String nom_produit;

@@ -4,7 +4,7 @@
 
 Projet de formation (GRETA 92) : boutique en ligne d'animaux de compagnie.
 
-**Stack :** Java 11 · Spring Boot 2.7 · Spring MVC + JSP/JSTL · Spring Data JPA (Hibernate) · MySQL 8 · Bootstrap 5
+**Stack :** Java 21 · Spring Boot 4.1 · Spring MVC + JSP/JSTL · Spring Data JPA (Hibernate) · MySQL 8 · Bootstrap 5
 
 ## Fonctionnalités
 
@@ -36,7 +36,7 @@ Arrêter : `Ctrl+C`, puis `docker compose down`
 
 ### Option 2 — En local avec WAMP (ou tout MySQL)
 
-Prérequis : JDK 11+, MySQL démarré, une base vide nommée `domesservice`.
+Prérequis : JDK 21+, MySQL démarré, une base vide nommée `domesservice`.
 
 1. Copier `src/main/resources/application-local.properties.example`
    en `application-local.properties` (même dossier, ignoré par Git) et y mettre

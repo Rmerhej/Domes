@@ -1,8 +1,8 @@
 package fr.greta92.Domes.entities;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +10,9 @@ import java.util.Objects;
 
 public class Article {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    // Compteur commun "hibernate_sequence", comme avant la migration (voir AlignementIdentifiants)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_article")
+    @SequenceGenerator(name = "seq_article", sequenceName = "hibernate_sequence", allocationSize = 1)
     private int id_article;
     @NotEmpty(message = "ce champ ne doit pas être vide")
     private String nom_article;

@@ -1,6 +1,6 @@
 package fr.greta92.Domes.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Une ligne de commande : un article, une quantité et le prix unitaire

@@ -5,7 +5,7 @@ import fr.greta92.Domes.entities.CartItem;
 import fr.greta92.Domes.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;

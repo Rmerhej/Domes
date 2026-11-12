@@ -11,8 +11,9 @@ import org.springframework.stereotype.Component;
 /**
  * Au démarrage : recale le compteur d'identifiants de Hibernate.
  *
- * Pourquoi ? Les entités en GenerationType.AUTO (Article, Client, Produit, Categorie)
- * reçoivent leur id d'un compteur commun, la table "hibernate_sequence" (sous MySQL).
+ * Pourquoi ? Les entités Article, Client, Produit, Categorie... reçoivent leur id
+ * d'un compteur commun, la table "hibernate_sequence" (sous MySQL), déclaré dans
+ * chaque entité avec @SequenceGenerator(sequenceName = "hibernate_sequence").
  * Or des lignes ont été insérées avec un id choisi à la main (data.sql, phpMyAdmin) :
  * le compteur, lui, n'a pas avancé. Sans ce recalage, le premier animal créé dans
  * l'espace admin recevrait par exemple l'id 1, déjà pris, et l'enregistrement échouerait.

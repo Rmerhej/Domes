@@ -1,16 +1,19 @@
     package fr.greta92.Domes.entities;
 
-    import javax.persistence.Entity;
-    import javax.persistence.GeneratedValue;
-    import javax.persistence.GenerationType;
-    import javax.persistence.Id;
-    import javax.validation.constraints.NotNull;
+    import jakarta.persistence.Entity;
+    import jakarta.persistence.GeneratedValue;
+    import jakarta.persistence.GenerationType;
+    import jakarta.persistence.Id;
+    import jakarta.persistence.SequenceGenerator;
+    import jakarta.validation.constraints.NotNull;
     import java.util.Objects;
 
     @Entity
     public class Habite {
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        // Compteur commun "hibernate_sequence", comme avant la migration (voir AlignementIdentifiants)
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_habite")
+        @SequenceGenerator(name = "seq_habite", sequenceName = "hibernate_sequence", allocationSize = 1)
         private int id_client;
     @NotNull
         private int id_adresse;

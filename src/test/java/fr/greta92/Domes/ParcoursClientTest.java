@@ -17,7 +17,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -75,7 +74,7 @@ class ParcoursClientTest extends TestAvecDonnees {
     void unePageReserveeRenvoieVersLaConnexion() throws Exception {
         mvc.perform(get("/mesCommandes"))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrlPattern("**/seConnecter"));
+                .andExpect(redirectedUrl("/seConnecter"));   // Spring Security 7 : adresse relative
     }
 
     @Test

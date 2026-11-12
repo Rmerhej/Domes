@@ -1,14 +1,18 @@
 package fr.greta92.Domes.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
 public class LignePanier {
     @Id
-    @GeneratedValue
+    // Compteur commun "hibernate_sequence", comme avant la migration (voir AlignementIdentifiants)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_lignepanier")
+    @SequenceGenerator(name = "seq_lignepanier", sequenceName = "hibernate_sequence", allocationSize = 1)
     private int id_ligne;
     @ManyToOne
     private Article articleLignePanier;

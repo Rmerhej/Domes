@@ -31,11 +31,11 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(auth -> auth
                 // espace administrateur : rôle ADMIN (logins listés dans ADMIN_LOGINS)
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
                 // pages réservées aux clients connectés
-                .antMatchers(HttpMethod.POST, "/panier").authenticated()   // ajouter au panier
-                .antMatchers("/achat", "/payer", "/commande/**", "/mesCommandes",
-                             "/modifierCompte", "/modification").authenticated()
+                .requestMatchers(HttpMethod.POST, "/panier").authenticated()   // ajouter au panier
+                .requestMatchers("/achat", "/payer", "/commande/**", "/mesCommandes",
+                                 "/modifierCompte", "/modification").authenticated()
                 // tout le reste est public : accueil, catalogue, recherche, inscription...
                 .anyRequest().permitAll()
             )

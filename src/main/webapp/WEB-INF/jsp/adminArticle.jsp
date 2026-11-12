@@ -70,6 +70,15 @@
           <form:textarea path="description" id="description" rows="5" cssClass="form-control" cssErrorClass="form-control is-invalid" maxlength="2000"/>
           <form:errors path="description" cssClass="invalid-feedback d-block"/>
         </div>
+        <div class="col-12">
+          <div class="form-check">
+            <%-- form:checkbox ajoute un champ caché : décochée, la case envoie bien "faux" --%>
+            <form:checkbox path="disponible" id="disponible" cssClass="form-check-input"/>
+            <label class="form-check-label" for="disponible">En vente</label>
+            <div class="form-text">Décochez si l'animal a été adopté. Il est décoché automatiquement à chaque achat,
+              et recoché si la commande est annulée.</div>
+          </div>
+        </div>
       </div>
 
       <div class="d-flex flex-wrap gap-3 mt-4">

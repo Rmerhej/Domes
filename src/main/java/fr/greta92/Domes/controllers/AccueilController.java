@@ -31,9 +31,9 @@
         public String goToAccueil(@RequestParam(value = "connecte", required = false) String connecte,
                                   @RequestParam(value = "deconnecte", required = false) String deconnecte,
                                   Model model){
-            // 4 animaux tirés au hasard pour la vitrine de l'accueil
+            // 4 animaux encore disponibles, tirés au hasard pour la vitrine de l'accueil
             List<Article> animaux = new ArrayList<>();
-            articleRepository.findAll().forEach(animaux::add);
+            articleRepository.findAll().forEach(a -> { if (a.isDisponible()) animaux.add(a); });
             Collections.shuffle(animaux);
             model.addAttribute("animaux", animaux.subList(0, Math.min(4, animaux.size())));
             if (connecte != null) {

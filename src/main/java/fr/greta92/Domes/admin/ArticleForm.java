@@ -37,6 +37,9 @@ public class ArticleForm {
     @Size(max = 2000, message = "2000 caractères maximum.")
     private String description;
 
+    // Case « En vente » : cochée par défaut pour un nouvel animal
+    private boolean disponible = true;
+
     public static ArticleForm depuis(Article article) {
         ArticleForm form = new ArticleForm();
         form.id = article.getId_article();
@@ -45,6 +48,7 @@ public class ArticleForm {
         form.image = article.getImage_article();
         form.idProduit = article.getProduit() != null ? article.getProduit().getId_produit() : null;
         form.description = article.getDescription();
+        form.disponible = article.isDisponible();
         return form;
     }
 
@@ -64,4 +68,6 @@ public class ArticleForm {
     public void setIdProduit(Integer idProduit) { this.idProduit = idProduit; }
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
+    public boolean isDisponible() { return disponible; }
+    public void setDisponible(boolean disponible) { this.disponible = disponible; }
 }

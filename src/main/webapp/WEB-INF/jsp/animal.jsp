@@ -35,6 +35,17 @@
         </c:otherwise>
       </c:choose>
 
+      <c:if test="${not empty erreur}">
+        <div class="alert alert-danger mt-4" role="alert"><c:out value="${erreur}"/></div>
+      </c:if>
+
+      <c:choose>
+      <c:when test="${not article.disponible}">
+        <p class="adopte-texte fs-5 mt-4"><i class="bi bi-house-heart" aria-hidden="true"></i>
+          <c:out value="${article.nom_article}"/> a déjà trouvé une famille.</p>
+        <a href="${empty article.categorie ? '/catalogue' : ('/tocateg?name=' += article.categorie.id_categorie)}" class="btn btn-outline-primary">Voir les autres animaux disponibles</a>
+      </c:when>
+      <c:otherwise>
       <form action="/panier" method="post" class="d-flex flex-wrap align-items-end gap-3 mt-4">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <input type="hidden" name="idArticle" value="<c:out value="${article.id_article}"/>">
@@ -44,6 +55,8 @@
         </div>
         <button type="submit" class="btn btn-primary btn-lg"><i class="bi bi-basket2" aria-hidden="true"></i> Ajouter au panier</button>
       </form>
+      </c:otherwise>
+      </c:choose>
 
       <p class="mt-4 mb-0"><a href="/nousContacter">Une question sur <c:out value="${article.nom_article}"/> ? Contactez-nous</a></p>
     </div>

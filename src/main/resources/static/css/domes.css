@@ -260,3 +260,28 @@ h3 { font-size: 1.25rem; }
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
 }
+
+/* ---------- Étiquettes : disponibilité et statut des commandes ---------- */
+.etiquette {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--surface);
+  color: var(--encre);
+  border: 1px solid var(--trait);
+}
+.etiquette-ok, .statut-LIVREE { background: #E3F1EC; color: var(--sauge-fonce); border-color: #BFDDD3; }
+.etiquette-adopte { background: #FDEBD9; color: #8A4A0B; border-color: #F5C99C; }
+.statut-PAYEE { background: #E7EEF8; color: #234A7A; border-color: #C3D3EA; }
+.statut-EXPEDIEE { background: #FFF4D6; color: #6B5100; border-color: #F0DC9E; }
+.statut-ANNULEE { background: #F1F1F1; color: #5A5A5A; border-color: #DADADA; }
+.puces .compteur { margin-left: 0.3rem; font-size: 0.85em; opacity: 0.75; }
+
+/* Animal déjà adopté : photo atténuée, étiquette par-dessus */
+.carte-animal .photo { position: relative; display: block; }
+.carte-animal .photo .etiquette { position: absolute; top: 0.75rem; left: 0.75rem; }
+.carte-animal.adopte img { filter: grayscale(0.6); opacity: 0.8; }
+.adopte-texte { margin: auto 0 0; padding-top: 0.6rem; color: #8A4A0B; font-weight: 600; }

@@ -4,6 +4,7 @@
 <jsp:include page="header.jsp"><jsp:param name="titre" value="Administration"/></jsp:include>
 
 <div class="container section">
+  <jsp:include page="_ongletsAdmin.jsp"><jsp:param name="actif" value="animaux"/></jsp:include>
   <div class="entete-section">
     <h1 class="titre-page mb-0">Gérer les animaux</h1>
     <a href="/admin/articles/nouveau" class="btn btn-primary"><i class="bi bi-plus-lg" aria-hidden="true"></i> Ajouter un animal</a>
@@ -31,6 +32,7 @@
               <th scope="col">Animal</th>
               <th scope="col">Espèce et race</th>
               <th scope="col" class="text-end">Prix</th>
+              <th scope="col">En vente</th>
               <th scope="col"><span class="visually-hidden">Actions</span></th>
             </tr>
           </thead>
@@ -48,6 +50,12 @@
                   <c:if test="${not empty a.produit}"><span class="text-secondary">, <c:out value="${a.produit.nom_produit}"/></span></c:if>
                 </td>
                 <td class="text-end"><fmt:formatNumber value="${a.prix_unitaire_article}" type="currency" currencyCode="EUR"/></td>
+                <td>
+                  <c:choose>
+                    <c:when test="${a.disponible}"><span class="etiquette etiquette-ok">Disponible</span></c:when>
+                    <c:otherwise><span class="etiquette etiquette-adopte">Adopté</span></c:otherwise>
+                  </c:choose>
+                </td>
                 <td class="text-end text-nowrap">
                   <a href="/admin/articles/${a.id_article}" class="btn btn-outline-primary btn-sm">Modifier<span class="visually-hidden"> <c:out value="${a.nom_article}"/></span></a>
                   <form action="/admin/articles/${a.id_article}/supprimer" method="post" class="d-inline"

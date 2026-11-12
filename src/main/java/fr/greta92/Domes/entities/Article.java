@@ -24,6 +24,10 @@ public class Article {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    // En vente ou déjà adopté. Les animaux enregistrés avant l'ajout de cette colonne
+    // ont la valeur null : on les considère comme disponibles (voir isDisponible).
+    private Boolean disponible;
+
     @ManyToOne
     @JoinColumn(name = "id_produit", referencedColumnName = "id_produit")
     private Produit produit;
@@ -57,6 +61,14 @@ public class Article {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isDisponible() {
+        return disponible == null || disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
     public void setDescription(String description) {

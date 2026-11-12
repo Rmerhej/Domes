@@ -9,6 +9,20 @@ Projet de formation (GRETA 92) : boutique en ligne d'animaux de compagnie.
 
 https://github.com/user-attachments/assets/c3c06012-7022-458d-b27b-04f6f54fcd71
 
+<img width="498" height="182" alt="PasserLaCommandeEtPayer" src="https://github.com/user-attachments/assets/21f09b5b-28e3-433f-bff9-3072ff254d45" />
+<img width="462" height="863" alt="Capture d&#39;écran 2026-11-12 073043" src="https://github.com/user-attachments/assets/c4e5dcdf-b661-4a5f-b9f3-4b0622f9e41f" />
+<img width="370" height="690" alt="catalogue" src="https://github.com/user-attachments/assets/c7dab74f-5c3a-40dc-81d8-041f8e623f9f" />
+<img width="931" height="861" alt="Capture d&#39;écran 2026-11-12 073206" src="https://github.com/user-attachments/assets/7ef16749-5b9b-45cb-893e-9e1beec3cf76" />
+<img width="506" height="192" alt="Commandes" src="https://github.com/user-attachments/assets/4dd1c8ce-b293-4351-b422-3093b52fabb5" />
+<img width="745" height="689" alt="Page_Admin" src="https://github.com/user-attachments/assets/e825ca3c-f049-4e49-911e-340d7d820160" />
+<img width="546" height="718" alt="Accueil" src="https://github.com/user-attachments/assets/a53f3f56-1826-4d5f-808a-ab08b2f2fe35" />
+
+
+
+
+
+
+
 
 ## Fonctionnalités
 

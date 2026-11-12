@@ -6,6 +6,10 @@ Projet de formation (GRETA 92) : boutique en ligne d'animaux de compagnie.
 
 **Stack :** Java 21 · Spring Boot 4.1 · Spring MVC + JSP/JSTL · Spring Data JPA (Hibernate) · MySQL 8 · Bootstrap 5
 
+
+https://github.com/user-attachments/assets/c3c06012-7022-458d-b27b-04f6f54fcd71
+
+
 ## Fonctionnalités
 
 - Catalogue par catégorie (chiens, chats, poissons, reptiles, oiseaux) et recherche par nom

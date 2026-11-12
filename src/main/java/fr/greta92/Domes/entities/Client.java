@@ -1,8 +1,8 @@
 package fr.greta92.Domes.entities;
 
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +11,9 @@ import java.util.Objects;
 public class Client {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    // Compteur commun "hibernate_sequence", comme avant la migration (voir AlignementIdentifiants)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_client")
+    @SequenceGenerator(name = "seq_client", sequenceName = "hibernate_sequence", allocationSize = 1)
     private int id_client;
 
     private String nom_client;

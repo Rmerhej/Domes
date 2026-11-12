@@ -1,7 +1,7 @@
 package fr.greta92.Domes.entities;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +10,9 @@ import java.util.Objects;
 @Entity
 public class Panier {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    // Compteur commun "hibernate_sequence", comme avant la migration (voir AlignementIdentifiants)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_panier")
+    @SequenceGenerator(name = "seq_panier", sequenceName = "hibernate_sequence", allocationSize = 1)
     private int id_panier;
     @NotNull(message = "ce champ ne doit pas être vide")
     private Date date_panier;

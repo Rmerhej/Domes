@@ -1,15 +1,19 @@
     package fr.greta92.Domes.entities;
 
-    import javax.persistence.Entity;
-    import javax.persistence.GeneratedValue;
-    import javax.persistence.Id;
-    import javax.validation.constraints.NotEmpty;
+    import jakarta.persistence.Entity;
+    import jakarta.persistence.GeneratedValue;
+    import jakarta.persistence.Id;
+    import jakarta.persistence.GenerationType;
+    import jakarta.persistence.SequenceGenerator;
+    import jakarta.validation.constraints.NotEmpty;
     import java.util.Objects;
 
     @Entity
     public class Categorie {
         @Id
-        @GeneratedValue
+        // Compteur commun "hibernate_sequence", comme avant la migration (voir AlignementIdentifiants)
+        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_categorie")
+        @SequenceGenerator(name = "seq_categorie", sequenceName = "hibernate_sequence", allocationSize = 1)
         private int id_categorie;
         @NotEmpty(message = "ce champ ne doit pas être vide")
         private  String nom_categorie;

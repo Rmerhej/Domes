@@ -112,3 +112,10 @@ src/main/java/fr/greta92/Domes/
 src/main/webapp/WEB-INF/jsp/   vues JSP
 src/main/resources/static/     CSS et images
 ```
+## License and Copyright
+
+Copyright © 2026 Roland Merhej.
+All rights reserved.
+
+Source code is publicly available for review.
+See COPYRIGHT.md for usage restrictions.
